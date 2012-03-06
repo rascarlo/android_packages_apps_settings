@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/status_bar_title">
+    
+    <PreferenceScreen
+        android:key="navigation_bar"
+        android:fragment="com.android.settings.rascarlo.NavBar"
+        android:title="@string/navigation_bar_buttons_customization" />
+</PreferenceScreen>
