@@ -9,6 +9,14 @@
     <string name="volume_adjust_sounds_enable_title">Volume adjustment sound</string>
     <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with volume rocker</string>
     
+    <!-- Sound settings screen, volumes -->
+    <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
+    <string name="link_volume_mutes">Silent mode affects notifications</string>
+
+    <!-- Sound settings screen -->
+    <string name="volume_overlay_title">Volume panel style</string>
+    <string name="volume_ring_only_description">Ringtone</string>
+
     <!-- kill app long press back -->
     <string name="kill_app_longpress_back">Kill app back button</string>
     <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back key</string>
