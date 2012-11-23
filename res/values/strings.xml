@@ -4399,4 +4399,13 @@
     <!-- About phone screen, build date of ROM -->
     <string name="build_date">rasbeanjelly build date</string>
     <string name="build_date_default">2012-01-01-0000</string>
+
+    <!-- Sound settings screen, volumes -->
+    <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
+    <string name="link_volume_mutes">Silent mode affects notifications</string>
+
+    <!-- Sound settings screen -->
+    <string name="volume_overlay_title">Volume panel style</string>
+    <string name="volume_ring_only_description">Ringtone</string>
+    
  </resources>
