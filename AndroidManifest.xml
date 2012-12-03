@@ -1582,6 +1582,7 @@
 
         <!-- BUILD TWEAKS START -->
         <activity android:name=".rascarlo.SystemSettings" />
+        <activity android:name=".rascarlo.LockscreenTargets" />
         <!-- BUILD TWEAKS END -->
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
