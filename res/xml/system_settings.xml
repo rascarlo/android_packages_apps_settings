@@ -10,4 +10,9 @@
         android:fragment="com.android.settings.rascarlo.StatusBar"
         android:title="@string/status_bar_title" />
 
+     <Preference
+        android:fragment="com.android.settings.rascarlo.LockscreenTargets"
+        android:key="lockscreen_targets"
+        android:title="@string/lockscreen_target_title" />
+
 </PreferenceScreen>
