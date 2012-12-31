@@ -5,7 +5,11 @@
     android:title="@string/system_interface_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
     
-    
+    <PreferenceScreen
+        android:key="user_interface"
+        android:fragment="com.android.settings.rascarlo.UserInterface"
+        android:title="@string/user_interface_title" />
+
     <PreferenceScreen
         android:key="pie_control"
         android:fragment="com.android.settings.rascarlo.PieControl"

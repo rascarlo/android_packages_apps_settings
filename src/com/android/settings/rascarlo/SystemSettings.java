@@ -33,6 +33,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
 
+    private static final String KEY_USER_INTERFACE = "user_interface";
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_STATUS_BAR = "status_bar";
     private static final String KEY_NAVIGATION_BAR = "navigation_bar";
@@ -62,6 +63,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         } else {
             // NON USER_OWNER is logged in
             // remove non multi-user compatible settings
+            getPreferenceScreen().removePreference(findPreference(KEY_USER_INTERFACE));
             getPreferenceScreen().removePreference(findPreference(KEY_PIE_CONTROL));
             getPreferenceScreen().removePreference(findPreference(KEY_STATUS_BAR));
             getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
