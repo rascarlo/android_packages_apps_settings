@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 The CyanogenMod project
+ * Copyright (C) 2012 CyanogenMod
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,50 +16,37 @@
 
 package com.android.settings.rascarlo;
 
+import android.app.ActivityManagerNative;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceScreen;
+import android.util.Log;
 import android.view.IWindowManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.WarnedListPreference;
 
-public class SystemSettings extends SettingsPreferenceFragment {
+public class SystemSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener, OnPreferenceClickListener {
     private static final String TAG = "SystemSettings";
-
-    private static final String KEY_NAVIGATION_BAR = "navigation_bar";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.system_settings);
-
-        // Only show the hardware keys config on a device that does not have a navbar
-        // Only show the navigation bar config on phones that has a navigation bar
-        boolean removeKeys = false;
-        boolean removeNavbar = false;
-        IWindowManager windowManager = IWindowManager.Stub.asInterface(
-                ServiceManager.getService(Context.WINDOW_SERVICE));
-        try {
-            if (windowManager.hasNavigationBar()) {
-                removeKeys = true;
-                if (!Utils.isPhone(getActivity())) {
-                    removeNavbar = true;
-                }
-            } else {
-                removeNavbar = true;
-            }
-        } catch (RemoteException e) {
-            // Do nothing
-        }
-
-        if (removeNavbar) {
-            getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
-        }
     }
+
 
     @Override
     public void onResume() {
@@ -69,5 +56,20 @@ public class SystemSettings extends SettingsPreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        
+        return false;
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        return null;
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        return true;
     }
 }

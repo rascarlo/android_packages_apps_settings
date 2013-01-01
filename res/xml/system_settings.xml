@@ -10,11 +10,6 @@
         android:fragment="com.android.settings.rascarlo.StatusBar"
         android:title="@string/status_bar_title" />
 
-     <PreferenceScreen
-        android:key="navigation_bar"
-        android:fragment="com.android.settings.rascarlo.NavBar"
-        android:title="@string/navigation_bar_title" />
-
      <Preference
         android:fragment="com.android.settings.rascarlo.LockscreenTargets"
         android:key="lockscreen_targets"
