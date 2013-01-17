@@ -1468,6 +1468,7 @@
 
         <activity android:name=".rascarlo.SystemSettings" />
         <activity android:name=".rascarlo.LockscreenTargets" />
+        <activity android:name=".notificationlight.NotificationLightSettings" />
 
         <!-- BUILD TWEAKS END -->
 

@@ -35,5 +35,16 @@
             android:persistent="false" />
 
     </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="category_notification_pulse"
+        android:title="@string/category_notification_pulse_title">
 
+        <PreferenceScreen
+            android:key="notification_pulse"
+            android:title="@string/notification_pulse_title"
+            android:fragment="com.android.settings.notificationlight.NotificationLightSettings" />
+
+    </PreferenceCategory>
+    
 </PreferenceScreen>

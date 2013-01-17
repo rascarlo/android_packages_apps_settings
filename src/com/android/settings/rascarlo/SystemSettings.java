@@ -22,6 +22,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.view.IWindowManager;
@@ -37,8 +39,11 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAVIGATION_BAR = "navigation_bar";
     private static final String KEY_NAV_BUTTONS_EDIT = "nav_buttons_edit";
     private static final String KEY_NAV_BUTTONS_HEIGHT = "nav_buttons_height";
+    private static final String KEY_NOTIFICATION_PULSE_CATEGORY = "category_notification_pulse";
+    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
 
     private ListPreference mNavButtonsHeight;
+    private PreferenceScreen mNotificationPulse;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,17 @@ public class SystemSettings extends SettingsPreferenceFragment implements
                  Settings.System.NAV_BUTTONS_HEIGHT, 48);
         mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
         mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
+
+        // Notification lights
+        mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
+        if (mNotificationPulse != null) {
+            if (!getResources().getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)) {
+                getPreferenceScreen().removePreference(mNotificationPulse);
+                getPreferenceScreen().removePreference((PreferenceCategory) findPreference(KEY_NOTIFICATION_PULSE_CATEGORY));
+            } else {
+                updateLightPulseDescription();
+            }
+        }
 
         // Only show the navigation bar config on phones that has a navigation bar
         boolean removeKeys = false;
@@ -73,6 +89,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updateLightPulseDescription() {
+        if (Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1) {
+            mNotificationPulse.setSummary(getString(R.string.notification_light_enabled));
+        } else {
+            mNotificationPulse.setSummary(getString(R.string.notification_light_disabled));
+        }
+    }
+
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mNavButtonsHeight) {
             int statusNavButtonsHeight = Integer.valueOf((String) objValue);
@@ -88,6 +113,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        updateLightPulseDescription();
     }
 
     @Override
