@@ -17,6 +17,7 @@
 package com.android.settings.rascarlo;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -41,9 +42,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAV_BUTTONS_HEIGHT = "nav_buttons_height";
     private static final String KEY_NOTIFICATION_PULSE_CATEGORY = "category_notification_pulse";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final String QUICK_SETTINGS_CATEGORY = "quick_settings_category";
+    private static final String QUICK_PULLDOWN = "quick_pulldown";
 
     private ListPreference mNavButtonsHeight;
     private PreferenceScreen mNotificationPulse;
+    PreferenceCategory mQuickSettingsCategory;
+    ListPreference mQuickPulldown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         mNavButtonsHeight = (ListPreference) findPreference(KEY_NAV_BUTTONS_HEIGHT);
         mNavButtonsHeight.setOnPreferenceChangeListener(this);
-
         int statusNavButtonsHeight = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                  Settings.System.NAV_BUTTONS_HEIGHT, 48);
         mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
@@ -69,6 +73,21 @@ public class SystemSettings extends SettingsPreferenceFragment implements
                 updateLightPulseDescription();
             }
         }
+
+        // Quick Settings category and pull down. Only show on phones
+        mQuickSettingsCategory = (PreferenceCategory) getPreferenceScreen().findPreference(QUICK_SETTINGS_CATEGORY);
+        mQuickPulldown = (ListPreference) getPreferenceScreen().findPreference(QUICK_PULLDOWN);
+        if (!Utils.isPhone(getActivity())) {
+            if(mQuickPulldown != null)
+                getPreferenceScreen().removePreference(mQuickPulldown);
+                getPreferenceScreen().removePreference((PreferenceCategory) findPreference(QUICK_SETTINGS_CATEGORY));
+            } else {
+                mQuickPulldown.setOnPreferenceChangeListener(this);
+                int quickPulldownValue = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                        Settings.System.QS_QUICK_PULLDOWN, 0);
+                mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
+                updatePulldownSummary(quickPulldownValue);
+                }
 
         // Only show the navigation bar config on phones that has a navigation bar
         boolean removeKeys = false;
@@ -98,6 +117,19 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private void updatePulldownSummary(int value) {
+        Resources res = getResources();
+        if (value == 0) {
+            /* quick pulldown deactivated */
+            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
+        } else {
+            String direction = res.getString(value == 2
+                    ? R.string.quick_pulldown_summary_left
+                    : R.string.quick_pulldown_summary_right);
+            mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
+        }
+    }
+
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mNavButtonsHeight) {
             int statusNavButtonsHeight = Integer.valueOf((String) objValue);
@@ -106,9 +138,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements
                     Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
             return true;
-        }
+            } else if (preference == mQuickPulldown) {
+                int quickPulldownValue = Integer.valueOf((String) objValue);
+                Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                        Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
+                updatePulldownSummary(quickPulldownValue);
+                return true;
+                }
         return false;
-    }
+        }
 
     @Override
     public void onResume() {

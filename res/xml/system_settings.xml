@@ -33,7 +33,6 @@
             android:entryValues="@array/nav_buttons_height_values"
             android:defaultValue="48"
             android:persistent="false" />
-
     </PreferenceCategory>
     
     <PreferenceCategory
@@ -47,4 +46,16 @@
 
     </PreferenceCategory>
     
+    <PreferenceCategory
+        android:key="pref_general_settings"
+        android:title="@string/quick_settings_title_general" >
+
+        <ListPreference
+            android:key="quick_pulldown"
+            android:title="@string/title_quick_pulldown"
+            android:entries="@array/quick_pulldown_entries"
+            android:entryValues="@array/quick_pulldown_values"
+            android:persistent="false" />
+        </PreferenceCategory>
+
 </PreferenceScreen>
