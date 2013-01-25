@@ -47,7 +47,7 @@
     </PreferenceCategory>
     
     <PreferenceCategory
-        android:key="pref_general_settings"
+        android:key="quick_settings_category"
         android:title="@string/quick_settings_title_general" >
 
         <ListPreference
