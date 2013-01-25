@@ -893,6 +893,8 @@
         <item>@string/navigation_bar_height_32</item>
         <item>@string/navigation_bar_height_28</item>
         <item>@string/navigation_bar_height_24</item>
+        <item>@string/navigation_bar_height_20</item>
+        <item>@string/navigation_bar_height_0</item>
     </string-array>
 
     <string-array name="nav_buttons_height_values" translatable="false">
@@ -903,6 +905,8 @@
         <item>32</item>
         <item>28</item>
         <item>24</item>
+        <item>20</item>
+        <item>0</item>
     </string-array>
 
     <!-- Values for the notification light pulse spinners -->

@@ -4443,6 +4443,8 @@
     <string name="navigation_bar_height_32">32dp</string>
     <string name="navigation_bar_height_28">28dp</string>
     <string name="navigation_bar_height_24">24dp</string>
+    <string name="navigation_bar_height_20">20dp</string>
+    <string name="navigation_bar_height_0">0dp (hide)</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
