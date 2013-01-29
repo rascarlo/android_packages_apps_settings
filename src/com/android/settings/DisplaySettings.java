@@ -28,17 +28,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.WifiDisplay;
 import android.hardware.display.WifiDisplayStatus;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -63,8 +60,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
-    private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
-    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -72,8 +67,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mAccelerometer;
     private WarnedListPreference mFontSizePref;
-    private CheckBoxPreference mVolumeWake;
-
     private final Configuration mCurConfig = new Configuration();
     
     private ListPreference mScreenTimeoutPreference;
@@ -132,20 +125,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 == WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE) {
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
-            
-            mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
-            if (mVolumeWake != null) {
-                if (!getResources().getBoolean(R.bool.config_show_volumeRockerWake)) {
-                    getPreferenceScreen().removePreference(mVolumeWake);
-                    getPreferenceScreen().removePreference((PreferenceCategory) findPreference(KEY_WAKEUP_CATEGORY));
-                } else {
-                mVolumeWake.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
-                }
-                }
-            }
         }
-
+    }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
         ListPreference preference = mScreenTimeoutPreference;
@@ -333,9 +314,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mAccelerometer) {
             RotationPolicy.setRotationLockForAccessibility(
                     getActivity(), !mAccelerometer.isChecked());
-        } else if (preference == mVolumeWake) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
-                    mVolumeWake.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);

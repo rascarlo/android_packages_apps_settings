@@ -22,10 +22,6 @@
     <string name="additional_system_update" translatable="false"></string>
     <string name="additional_system_update_menu" translatable="false"></string>
 
-   <!-- Volume Rocker Wake Support. Some devices do not support (PMU) this.
-         Setting to false will disable Volume Rocker Wake support -->
-    <bool name="config_show_volumeRockerWake">false</bool>
-
     <!-- LED Flashlight -->
     <bool name="has_led_flash">false</bool>
 
