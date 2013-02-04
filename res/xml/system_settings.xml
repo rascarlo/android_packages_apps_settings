@@ -10,6 +10,11 @@
         android:fragment="com.android.settings.rascarlo.StatusBar"
         android:title="@string/status_bar_title" />
 
+      <PreferenceScreen
+        android:key="navigation_bar"
+        android:fragment="com.android.settings.rascarlo.NavBarSettings"
+        android:title="@string/navigation_bar_title" />
+
      <Preference
         android:fragment="com.android.settings.rascarlo.LockscreenTargets"
         android:key="lockscreen_targets"
@@ -19,26 +24,6 @@
         android:key="volume_rocker_settings"
         android:fragment="com.android.settings.rascarlo.VolumeRocker"
         android:title="@string/volume_rocker_category_title" />
-
-    <PreferenceCategory
-        android:key="navigation_bar"
-        android:title="@string/navigation_bar_title">
-
-        <PreferenceScreen
-            android:key="nav_buttons_edit"
-            android:fragment="com.android.settings.rascarlo.NavBarEdit"
-            android:title="@string/navigation_bar_edit_title"
-            android:summary="@string/navigation_bar_edit_summary" />
-
-        <ListPreference
-            android:key="nav_buttons_height"
-            android:dialogTitle="@string/navigation_bar_height"
-            android:title="@string/navigation_bar_height"
-            android:entries="@array/nav_buttons_height_entries"
-            android:entryValues="@array/nav_buttons_height_values"
-            android:defaultValue="48"
-            android:persistent="false" />
-    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="category_notification_pulse"
