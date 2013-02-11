@@ -21,6 +21,11 @@
         android:title="@string/lockscreen_target_title" />
 
     <PreferenceScreen
+        android:key="navigation_ring"
+        android:fragment="com.android.settings.rascarlo.NavRing"
+        android:title="@string/navigation_ring_title" />
+
+    <PreferenceScreen
         android:key="volume_rocker_settings"
         android:fragment="com.android.settings.rascarlo.VolumeRocker"
         android:title="@string/volume_rocker_category_title" />
