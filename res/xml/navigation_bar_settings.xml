@@ -31,5 +31,10 @@
         android:entryValues="@array/nav_buttons_height_values"
         android:defaultValue="48"
         android:persistent="false" />
+    
+    <PreferenceScreen
+        android:key="navigation_ring"
+        android:fragment="com.android.settings.rascarlo.NavRing"
+        android:title="@string/navigation_ring_title" />
 
 </PreferenceScreen>
