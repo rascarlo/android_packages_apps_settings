@@ -23,6 +23,10 @@
         android:title="@string/navigation_bar_edit_title"
         android:summary="@string/navigation_bar_edit_summary" />
 
+    <PreferenceScreen
+        android:key="navigation_button_color"
+        android:title="@string/navigation_button_color_title" />
+
     <ListPreference
         android:key="nav_buttons_height"
         android:dialogTitle="@string/navigation_bar_height"

@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -26,8 +27,10 @@ import com.android.settings.SettingsPreferenceFragment;
 public class NavBarSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String KEY_NAV_BUTTONS_HEIGHT = "nav_buttons_height";
+    private static final String NAVIGATION_BUTTON_COLOR = "navigation_button_color";
 
     private ListPreference mNavButtonsHeight;
+    private Preference mNavigationButtonColor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
         mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
         mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
         
+        mNavigationButtonColor = (Preference) getPreferenceScreen().findPreference(NAVIGATION_BUTTON_COLOR);
         }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
@@ -55,4 +59,27 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
         }
         return true;
     }
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mNavigationButtonColor) {
+            ColorPickerDialog mColorPicker = new ColorPickerDialog(getActivity(),
+                    mButtonColorListener, Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAVIGATION_BUTTON_COLOR,
+                    getActivity().getApplicationContext().getResources().getColor(
+                    com.android.internal.R.color.transparent)));
+            mColorPicker.setDefaultColor(0x00000000);
+            mColorPicker.show();
+            return true;
+        }
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+    
+    ColorPickerDialog.OnColorChangedListener mButtonColorListener =
+            new ColorPickerDialog.OnColorChangedListener() {
+                public void colorChanged(int color) {
+                    Settings.System.putInt(getContentResolver(),
+                            Settings.System.NAVIGATION_BUTTON_COLOR, color);
+                }
+                public void colorUpdate(int color) {
+                }
+        };
 }
