@@ -27,6 +27,16 @@
         android:key="navigation_button_color"
         android:title="@string/navigation_button_color_title" />
 
+    <com.android.settings.rascarlo.SeekBarPreference
+        android:key="navigation_button_glow_time"
+        android:title="@string/navigation_button_glow_time_title"
+        android:max="500"
+        android:defaultValue="500" />
+    
+    <PreferenceScreen
+        android:key="navigation_button_glow_color"
+        android:title="@string/navigation_button_glow_color_title" />
+
     <ListPreference
         android:key="nav_buttons_height"
         android:dialogTitle="@string/navigation_bar_height"

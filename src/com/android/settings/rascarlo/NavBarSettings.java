@@ -28,9 +28,13 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
 
     private static final String KEY_NAV_BUTTONS_HEIGHT = "nav_buttons_height";
     private static final String NAVIGATION_BUTTON_COLOR = "navigation_button_color";
+    private static final String NAVIGATION_BUTTON_GLOW_COLOR = "navigation_button_glow_color";
+    private static final String NAVIGATION_BUTTON_GLOW_TIME = "navigation_button_glow_time";
 
     private ListPreference mNavButtonsHeight;
     private Preference mNavigationButtonColor;
+    private Preference mNavigationButtonGlowColor;
+    private SeekBarPreference mNavigationButtonGlowTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,13 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
         mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
         
         mNavigationButtonColor = (Preference) getPreferenceScreen().findPreference(NAVIGATION_BUTTON_COLOR);
+        
+        mNavigationButtonGlowColor = (Preference) getPreferenceScreen().findPreference(NAVIGATION_BUTTON_GLOW_COLOR);
+        
+        mNavigationButtonGlowTime = (SeekBarPreference) getPreferenceScreen().findPreference(NAVIGATION_BUTTON_GLOW_TIME);
+        mNavigationButtonGlowTime.setDefault(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.NAVIGATION_BUTTON_GLOW_TIME, 500));
+        mNavigationButtonGlowTime.setOnPreferenceChangeListener(this);
         }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
@@ -55,10 +66,14 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
             mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
-            return true;
+        } else if (preference == mNavigationButtonGlowTime) {
+            int value = (Integer) objValue;
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAVIGATION_BUTTON_GLOW_TIME, value);
         }
         return true;
     }
+    
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mNavigationButtonColor) {
             ColorPickerDialog mColorPicker = new ColorPickerDialog(getActivity(),
@@ -69,17 +84,36 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
             mColorPicker.setDefaultColor(0x00000000);
             mColorPicker.show();
             return true;
+        } else if (preference == mNavigationButtonGlowColor) {
+            ColorPickerDialog mColorPicker = new ColorPickerDialog(getActivity(),
+                    mGlowColorListener, Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.NAVIGATION_BUTTON_GLOW_COLOR,
+                    getActivity().getApplicationContext().getResources().getColor(
+                    com.android.internal.R.color.transparent)));
+            mColorPicker.setDefaultColor(0x00000000);
+            mColorPicker.show();
+            return true;
         }
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
-    
+
     ColorPickerDialog.OnColorChangedListener mButtonColorListener =
             new ColorPickerDialog.OnColorChangedListener() {
-                public void colorChanged(int color) {
-                    Settings.System.putInt(getContentResolver(),
-                            Settings.System.NAVIGATION_BUTTON_COLOR, color);
-                }
-                public void colorUpdate(int color) {
+        public void colorChanged(int color) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.NAVIGATION_BUTTON_COLOR, color);
+            }
+        public void colorUpdate(int color) {
                 }
         };
+
+        ColorPickerDialog.OnColorChangedListener mGlowColorListener =
+                new ColorPickerDialog.OnColorChangedListener() {
+                    public void colorChanged(int color) {
+                        Settings.System.putInt(getContentResolver(),
+                                Settings.System.NAVIGATION_BUTTON_GLOW_COLOR, color);
+                    }
+                    public void colorUpdate(int color) {
+                    }
+            };
 }
