@@ -32,11 +32,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
 
+    private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_NOTIFICATION_PULSE_CATEGORY = "category_notification_pulse";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String QUICK_SETTINGS_CATEGORY = "quick_settings_category";
     private static final String QUICK_PULLDOWN = "quick_pulldown";
 
+    private PreferenceScreen mPieControl;
     private PreferenceScreen mNotificationPulse;
     private PreferenceCategory mQuickSettingsCategory;
     private ListPreference mQuickPulldown;
@@ -47,14 +49,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.system_settings);
 
+        // Pie controls
+        mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);
+
         // Notification lights
         mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
         if (mNotificationPulse != null) {
             if (!getResources().getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)) {
                 getPreferenceScreen().removePreference(mNotificationPulse);
                 getPreferenceScreen().removePreference((PreferenceCategory) findPreference(KEY_NOTIFICATION_PULSE_CATEGORY));
-            } else {
-                updateLightPulseDescription();
+                mNotificationPulse = null;
             }
         }
 
@@ -95,6 +99,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
         }
     }
+    
+    private void updatePieControlDescription() {
+        if (Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.PIE_CONTROLS, 0) == 1) {
+            mPieControl.setSummary(getString(R.string.pie_control_enabled));
+        } else {
+            mPieControl.setSummary(getString(R.string.pie_control_disabled));
+        }
+    }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mQuickPulldown) {
@@ -110,7 +123,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        updateLightPulseDescription();
+        if (mNotificationPulse != null) {
+            updateLightPulseDescription();
+        }
+        if (mPieControl != null) {
+            updatePieControlDescription();
+        }
     }
 
     @Override
