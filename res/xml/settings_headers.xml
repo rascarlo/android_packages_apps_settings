@@ -198,7 +198,7 @@
     <header
         android:id="@+id/superuser"
         android:fragment="com.koushikdutta.superuser.PolicyNativeFragment"
-        android:icon="@drawable/ic_action_permission"
+        android:icon="@drawable/ic_action_permission_blue"
         android:title="@string/superuser" />
 
     <!-- About Device -->
