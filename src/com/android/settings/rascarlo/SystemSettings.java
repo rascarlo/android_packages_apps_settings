@@ -18,6 +18,7 @@ package com.android.settings.rascarlo;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -33,6 +34,10 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "SystemSettings";
 
     private static final String KEY_PIE_CONTROL = "pie_control";
+    private static final String KEY_STATUS_BAR = "status_bar";
+    private static final String KEY_NAVIGATION_BAR = "navigation_bar";
+    private static final String KEY_LOCKSCREEN_TARGETS = "lockscreen_targets";
+    private static final String KEY_VOLUME_ROCKER_SETTINGS = "volume_rocker_settings";
     private static final String KEY_NOTIFICATION_PULSE_CATEGORY = "category_notification_pulse";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String QUICK_SETTINGS_CATEGORY = "quick_settings_category";
@@ -42,12 +47,24 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mNotificationPulse;
     private PreferenceCategory mQuickSettingsCategory;
     private ListPreference mQuickPulldown;
+    private boolean mPrimaryUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.system_settings);
+        
+        // USER_OWNER is logged in
+        mPrimaryUser = UserHandle.myUserId() == UserHandle.USER_OWNER;
+        if (mPrimaryUser) {
+            // do nothing, show all settings
+        } else {
+            // NON USER_OWNER is logged in
+            // remove non multi-user compatible settings
+            getPreferenceScreen().removePreference(findPreference(KEY_STATUS_BAR));
+            getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
+        }
 
         // Pie controls
         mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);
@@ -78,6 +95,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             }
         }
 
+    private void updatePieControlDescription() {
+        if (Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.PIE_CONTROLS, 0) == 1) {
+            mPieControl.setSummary(getString(R.string.pie_control_enabled));
+        } else {
+            mPieControl.setSummary(getString(R.string.pie_control_disabled));
+        }
+    }
+
     private void updateLightPulseDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1) {
@@ -97,15 +123,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
                     ? R.string.quick_pulldown_summary_left
                     : R.string.quick_pulldown_summary_right);
             mQuickPulldown.setSummary(res.getString(R.string.summary_quick_pulldown, direction));
-        }
-    }
-    
-    private void updatePieControlDescription() {
-        if (Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.PIE_CONTROLS, 0) == 1) {
-            mPieControl.setSummary(getString(R.string.pie_control_enabled));
-        } else {
-            mPieControl.setSummary(getString(R.string.pie_control_disabled));
         }
     }
 
