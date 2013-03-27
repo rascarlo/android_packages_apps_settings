@@ -4441,10 +4441,10 @@
     <string name="status_bar_toggle_info">Automatic brightness must be disabled</string>
 
     <!-- Expanded Desktop -->
-    <string name="expanded_desktop_title">Status bar in expanded desktop mode</string>
-    <string name="summary_expanded_desktop">%1$s</string>
-    <string name="expanded_desktop_status_bar">Visible</string>
-    <string name="expanded_desktop_no_status_bar">Hidden</string>
+    <string name="power_menu_expanded_desktop">Expanded desktop</string>
+    <string name="expanded_desktop_disabled">Off</string>
+    <string name="expanded_desktop_status_bar">Status bar visible</string>
+    <string name="expanded_desktop_no_status_bar">Status bar hidden</string>
 
     <!-- Kill app long-press back -->
     <string name="kill_app_longpress_back">Kill app back button</string>

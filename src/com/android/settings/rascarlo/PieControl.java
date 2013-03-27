@@ -20,7 +20,7 @@ public class PieControl extends SettingsPreferenceFragment
 
     private static final int DEFAULT_POSITION = 1 << 1; // this equals Position.BOTTOM.FLAG
 
-    private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop_general";
+    private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
     private static final String PIE_CONTROL = "pie_control_checkbox";
     private static final String SEARCH_BUTTON = "pie_control_search";
     private static final String PIE_SIZE = "pie_control_size";
@@ -31,7 +31,7 @@ public class PieControl extends SettingsPreferenceFragment
         "pie_control_trigger_top"
     };
 
-    private ListPreference mExpandedDesktopPref;
+    ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mPieControl;
     private CheckBoxPreference mSearchButton;
     private SeekBarDialogPreference mPieSize;
@@ -153,11 +153,22 @@ public class PieControl extends SettingsPreferenceFragment
     private void updateExpandedDesktopSummary(int value) {
         Resources res = getResources();
 
-        if (value == 1) {
+        if (value == 0) {
+            // Expanded desktop deactivated
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 0);
+            mExpandedDesktopPref.setSummary(res.getString(R.string.expanded_desktop_disabled));
+            // Disable expanded desktop if enabled
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.EXPANDED_DESKTOP_STATE, 0);
+        } else if (value == 1) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
             mExpandedDesktopPref.setSummary(res.getString(R.string.expanded_desktop_status_bar));
         } else if (value == 2) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
             mExpandedDesktopPref.setSummary(res.getString(R.string.expanded_desktop_no_status_bar));
         }
     }
-
 }
