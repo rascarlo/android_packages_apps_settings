@@ -1,10 +1,12 @@
 package com.android.settings.rascarlo;
 
 import android.content.ContentResolver;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.SeekBarDialogPreference;
@@ -18,6 +20,7 @@ public class PieControl extends SettingsPreferenceFragment
 
     private static final int DEFAULT_POSITION = 1 << 1; // this equals Position.BOTTOM.FLAG
 
+    private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop_general";
     private static final String PIE_CONTROL = "pie_control_checkbox";
     private static final String SEARCH_BUTTON = "pie_control_search";
     private static final String PIE_SIZE = "pie_control_size";
@@ -28,6 +31,7 @@ public class PieControl extends SettingsPreferenceFragment
         "pie_control_trigger_top"
     };
 
+    private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mPieControl;
     private CheckBoxPreference mSearchButton;
     private SeekBarDialogPreference mPieSize;
@@ -45,8 +49,14 @@ public class PieControl extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.pie_control);
-
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mExpandedDesktopPref = (ListPreference) prefSet.findPreference(KEY_EXPANDED_DESKTOP);
+        mExpandedDesktopPref.setOnPreferenceChangeListener(this);
+        int expandedDesktopValue = Settings.System.getInt(getContentResolver(), Settings.System.EXPANDED_DESKTOP_STYLE, 0);
+        mExpandedDesktopPref.setValue(String.valueOf(expandedDesktopValue));
+        updateExpandedDesktopSummary(expandedDesktopValue);
+
         mPieControl = (CheckBoxPreference) prefSet.findPreference(PIE_CONTROL);
         mPieControl.setOnPreferenceChangeListener(this);
         mSearchButton = (CheckBoxPreference) prefSet.findPreference(SEARCH_BUTTON);
@@ -61,7 +71,15 @@ public class PieControl extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mPieControl) {
+
+        if (preference == mExpandedDesktopPref) {
+        int expandedDesktopValue = Integer.valueOf((String) newValue);
+        Settings.System.putInt(getContentResolver(),
+                Settings.System.EXPANDED_DESKTOP_STYLE, expandedDesktopValue);
+        updateExpandedDesktopSummary(expandedDesktopValue);
+        return true;
+
+        } else if (preference == mPieControl) {
             boolean newState = (Boolean) newValue;
 
             Settings.System.putInt(getContentResolver(),
@@ -129,6 +147,16 @@ public class PieControl extends SettingsPreferenceFragment
             } else {
                 mTrigger[i].setChecked(false);
             }
+        }
+    }
+
+    private void updateExpandedDesktopSummary(int value) {
+        Resources res = getResources();
+
+        if (value == 1) {
+            mExpandedDesktopPref.setSummary(res.getString(R.string.expanded_desktop_status_bar));
+        } else if (value == 2) {
+            mExpandedDesktopPref.setSummary(res.getString(R.string.expanded_desktop_no_status_bar));
         }
     }
 

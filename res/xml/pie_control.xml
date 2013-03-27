@@ -17,25 +17,32 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/pie_control_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+    
+    <ListPreference
+        android:key="expanded_desktop_general"
+        android:title="@string/expanded_desktop_title"
+        android:entries="@array/expanded_desktop_entries"
+        android:entryValues="@array/expanded_desktop_values"
+        android:persistent="false" />
 
-    <CheckBoxPreference
-        android:key="pie_control_checkbox"
-        android:title="@string/pie_control_title"
-        android:defaultValue="false" />
-
-    <CheckBoxPreference
-        android:key="pie_control_search"
-        android:title="@string/pie_control_search_title"
-        android:defaultValue="false" />
-
-    <com.android.settings.rascarlo.PieSizePreference
-        android:key="pie_control_size"
-        android:title="@string/pie_control_size"
-        android:dialogTitle="@string/pie_control_size" />
+        <CheckBoxPreference
+            android:key="pie_control_checkbox"
+            android:title="@string/pie_control_title"
+            android:defaultValue="false" />
+        
+        <CheckBoxPreference
+            android:key="pie_control_search"
+            android:title="@string/pie_control_search_title"
+            android:defaultValue="false" />
+        
+        <com.android.settings.rascarlo.PieSizePreference
+            android:key="pie_control_size"
+            android:title="@string/pie_control_size"
+            android:dialogTitle="@string/pie_control_size" />
 
     <PreferenceCategory
         android:title="@string/pie_control_trigger_positions">
-
+        
         <CheckBoxPreference
             android:key="pie_control_trigger_left"
             android:title="@string/pie_control_trigger_left"
@@ -56,5 +63,5 @@
             android:title="@string/pie_control_trigger_top"
             android:summary="@string/pie_control_trigger_top_summary"
             android:defaultValue="false" />
-   </PreferenceCategory>
-</PreferenceScreen>
+    </PreferenceCategory>
+    </PreferenceScreen>
