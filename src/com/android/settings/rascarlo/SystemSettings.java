@@ -62,6 +62,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         } else {
             // NON USER_OWNER is logged in
             // remove non multi-user compatible settings
+            getPreferenceScreen().removePreference(findPreference(KEY_PIE_CONTROL));
             getPreferenceScreen().removePreference(findPreference(KEY_STATUS_BAR));
             getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
         }
