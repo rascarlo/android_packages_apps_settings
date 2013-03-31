@@ -4590,7 +4590,6 @@
     <string name="pie_control_title">Pie controls</string>
     <string name="pie_control_enabled">Pie enabled when expanded desktop is active</string>
     <string name="pie_control_disabled">Pie disabled</string>
-    <string name="pie_control_search_title">Show search button</string>
     <string name="pie_control_size">Navigation key size</string>
     <string name="pie_control_trigger_positions">Trigger positions</string>
     <string name="pie_control_trigger_left">Left screen edge</string>
