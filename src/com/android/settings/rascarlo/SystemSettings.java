@@ -44,6 +44,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String QUICK_SETTINGS_CATEGORY = "quick_settings_category";
     private static final String QUICK_PULLDOWN = "quick_pulldown";
 
+    private PreferenceScreen mUserInterface;
     private PreferenceScreen mPieControl;
     private PreferenceScreen mNotificationPulse;
     private PreferenceCategory mQuickSettingsCategory;
@@ -67,6 +68,15 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(findPreference(KEY_PIE_CONTROL));
             getPreferenceScreen().removePreference(findPreference(KEY_STATUS_BAR));
             getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
+        }
+
+        // User Interface
+        mUserInterface = (PreferenceScreen) findPreference(KEY_USER_INTERFACE);
+        if (mUserInterface != null) {
+            if (!Utils.isPhone(getActivity())) {
+                getPreferenceScreen().removePreference(mUserInterface);
+                mUserInterface = null;
+            }
         }
 
         // Pie controls
