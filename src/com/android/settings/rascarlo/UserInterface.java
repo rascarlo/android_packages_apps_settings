@@ -16,6 +16,7 @@
 
 package com.android.settings.rascarlo;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -42,16 +43,34 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         mDualPanePrefs = (ListPreference) prefSet.findPreference(DUAL_PANE_PREFS);
         mDualPanePrefs.setOnPreferenceChangeListener(this);
+        int dualPanePrefsValue = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.DUAL_PANE_PREFS, 0);
+        mDualPanePrefs.setValue(String.valueOf(dualPanePrefsValue));
+        updateDualPanePrefs(dualPanePrefsValue);
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    private void updateDualPanePrefs(int value) {
+        Resources res = getResources();
+        if (value == 0) {
+            /* dual pane deactivated */
+            mDualPanePrefs.setSummary(res.getString(R.string.dual_pane_prefs_off));
+        } else {
+            String direction = res.getString(value == 2
+                    ? R.string.dual_pane_prefs_landscape
+                    : R.string.dual_pane_prefs_on);
+            mDualPanePrefs.setSummary(res.getString(R.string.dual_pane_prefs_summary, direction));
+        }
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mDualPanePrefs) {
-            int value = Integer.valueOf((String) newValue);
+            int dualPanePrefsValue = Integer.valueOf((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.DUAL_PANE_PREFS, value);
+                    Settings.System.DUAL_PANE_PREFS, dualPanePrefsValue);
+            updateDualPanePrefs(dualPanePrefsValue);
             getActivity().recreate();
             return true;
-        }
+            }
         return false;
-    }
+        }
 }

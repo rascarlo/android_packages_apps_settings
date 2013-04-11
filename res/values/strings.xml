@@ -4601,8 +4601,8 @@
     <!--  User Interface -->
     <string name="user_interface_title">User interface</string>
     <string name="dual_pane_prefs_title">Dual pane preferences</string>
-    <string name="dual_pane_prefs_summary">Choose when to use dual pane preferences</string>
+    <string name="dual_pane_prefs_summary">%1$s use dual pane preferences</string>
     <string name="dual_pane_prefs_on">Always</string>
-    <string name="dual_pane_prefs_off">Never</string>
+    <string name="dual_pane_prefs_off">Off</string>
     <string name="dual_pane_prefs_landscape">Only in landscape</string>
 </resources>
