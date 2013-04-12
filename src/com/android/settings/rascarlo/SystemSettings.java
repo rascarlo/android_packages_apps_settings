@@ -72,10 +72,10 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_RING));
         }
 
-        // User Interface
+        // User Interface. Only show on selected devices
         mUserInterface = (PreferenceScreen) findPreference(KEY_USER_INTERFACE);
         if (mUserInterface != null) {
-            if (!Utils.isPhone(getActivity())) {
+            if (!getResources().getBoolean(R.bool.config_show_user_interface)) {
                 getPreferenceScreen().removePreference(mUserInterface);
                 mUserInterface = null;
             }
