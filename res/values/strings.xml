@@ -4399,6 +4399,7 @@
     <!-- Sound settings screen, volumes -->
     <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
     <string name="link_volume_mutes">Silent mode affects notifications</string>
+    <string name="volume_keys_control_ring_stream">Volume keys control ringtone volume</string>
 
     <!-- Navigation Bar  -->
     <string name="navigation_bar_edit_title">Button customization</string>
