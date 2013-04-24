@@ -32,6 +32,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.view.VolumePanel;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -44,6 +45,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
+    private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     private static final String KEY_POWER_NOTIFICATIONS = "power_notifications";
     private static final String KEY_POWER_NOTIFICATIONS_VIBRATE = "power_notifications_vibrate";
     private static final String KEY_POWER_NOTIFICATIONS_RINGTONE = "power_notifications_ringtone";
@@ -59,6 +61,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ListPreference mDualPanePrefs;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
     private CheckBoxPreference mVolumeAdjustSounds;
+    private ListPreference mVolumeOverlay;
     private CheckBoxPreference mPowerSounds;
     private CheckBoxPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
@@ -102,6 +105,15 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mVolumeAdjustSounds.setPersistent(false);
         mVolumeAdjustSounds.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
+        
+        // Volume panel
+        mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
+        mVolumeOverlay.setOnPreferenceChangeListener(this);
+        int volumeOverlay = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.MODE_VOLUME_OVERLAY,
+                VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
+        mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
+        mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
 
         // power state change notification sounds
         mPowerSounds = (CheckBoxPreference) findPreference(KEY_POWER_NOTIFICATIONS);
@@ -186,6 +198,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.DUAL_PANE_PREFS, dualPanePrefsValue);
             updateDualPanePrefs(dualPanePrefsValue);
             getActivity().recreate();
+        } else if (preference == mVolumeOverlay) {
+            final int value = Integer.valueOf((String) objValue);
+            final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MODE_VOLUME_OVERLAY, value);
+            mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
             return true;
             }
         return false;

@@ -4400,10 +4400,6 @@
     <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
     <string name="link_volume_mutes">Silent mode affects notifications</string>
 
-    <!-- Sound settings screen -->
-    <string name="volume_overlay_title">Volume panel style</string>
-    <string name="volume_ring_only_description">Ringtone</string>
-
     <!-- Navigation Bar  -->
     <string name="navigation_bar_edit_title">Button customization</string>
     <string name="navigation_bar_edit_summary">Edit button layout</string>
@@ -4611,6 +4607,9 @@
     <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
     <!-- Sound settings screen, setting check box summary -->
     <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with hard keys</string>
+
+    <string name="volume_overlay_title">Volume panel style</string>
+    <string name="volume_ring_only_description">Ringtone</string>
     
     <!-- Category title for power sound notification specific Settings.
          [CHAR LIMIT=40] -->
