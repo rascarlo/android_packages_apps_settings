@@ -44,6 +44,18 @@
     </PreferenceCategory>
     
     <PreferenceCategory
+        android:key="user_interface_category_sound_volume"
+        android:title="@string/user_interface_category_sound_volume">
+        
+    <CheckBoxPreference
+            android:key="volume_adjust_sounds"
+            android:title="@string/volume_adjust_sounds_enable_title"
+            android:summary="@string/volume_adjust_sounds_enable_summary"
+            android:persistent="true" />
+    
+    </PreferenceCategory>
+    
+    <PreferenceCategory
             android:title="@string/power_notifications_category_title">
 
     <CheckBoxPreference

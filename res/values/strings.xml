@@ -4418,11 +4418,6 @@
     <string name="navigation_bar_height_20">20dp</string>
     <string name="navigation_bar_height_0">0dp (hide)</string>
 
-    <!-- Sound settings screen, setting check box label -->
-    <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
-    <!-- Sound settings screen, setting check box summary -->
-    <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with hard keys</string>
-    
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
     <string name="status_bar_clock_title">Clock</string>
@@ -4610,6 +4605,12 @@
     <!-- Wake up on charger -->
     <string name="user_interface_category_display">Display</string>
     <string name="wakeup_when_plugged_unplugged_title">Wake up when plugged/unplugged</string>
+    
+    <string name="user_interface_category_sound_volume">Sound &amp; volume</string>
+    <!-- Sound settings screen, setting check box label -->
+    <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
+    <!-- Sound settings screen, setting check box summary -->
+    <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with hard keys</string>
     
     <!-- Category title for power sound notification specific Settings.
          [CHAR LIMIT=40] -->
