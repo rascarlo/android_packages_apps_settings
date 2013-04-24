@@ -17,6 +17,10 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/user_interface_title">
+    
+     <PreferenceCategory
+        android:key="user_interface_category_general"
+        android:title="@string/user_interface_category_general">
 
     <ListPreference
         android:key="dual_pane_prefs"
@@ -25,5 +29,18 @@
         android:summary="@string/dual_pane_prefs_summary"
         android:entries="@array/entries_dual_pane_prefs"
         android:entryValues="@array/values_dual_pane_prefs" />
+    
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="user_interface_category_display"
+        android:title="@string/user_interface_category_display">
+    
+    <CheckBoxPreference
+        android:key="wakeup_when_plugged_unplugged"
+        android:title="@string/wakeup_when_plugged_unplugged_title"
+        android:defaultValue="true" />
+    
+    </PreferenceCategory>
 
 </PreferenceScreen>

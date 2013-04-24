@@ -74,12 +74,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         // User Interface. Only show on selected devices
         mUserInterface = (PreferenceScreen) findPreference(KEY_USER_INTERFACE);
-        if (mUserInterface != null) {
-            if (!getResources().getBoolean(R.bool.config_show_user_interface)) {
-                getPreferenceScreen().removePreference(mUserInterface);
-                mUserInterface = null;
-            }
-        }
 
         // Pie controls
         mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);

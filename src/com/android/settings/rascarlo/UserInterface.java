@@ -18,9 +18,11 @@ package com.android.settings.rascarlo;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
@@ -28,10 +30,17 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+    
+    private static final String USER_INTERFACE_CATEGORY_GENERAL = "user_interface_category_general";
+    private static final String USER_INTERFACE_CATEGORY_DISPLAY = "user_interface_category_display";
 
     private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
+    private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
 
+    private PreferenceCategory mUserInterfaceGeneral;
+    private PreferenceCategory mUserInterfaceDisplay;
     private ListPreference mDualPanePrefs;
+    private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,13 +50,31 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
+        // General
+        // Dual pane, only show on selected devices
+        mUserInterfaceGeneral = (PreferenceCategory) prefSet.findPreference(USER_INTERFACE_CATEGORY_GENERAL);
         mDualPanePrefs = (ListPreference) prefSet.findPreference(DUAL_PANE_PREFS);
-        mDualPanePrefs.setOnPreferenceChangeListener(this);
-        int dualPanePrefsValue = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.DUAL_PANE_PREFS, 0);
-        mDualPanePrefs.setValue(String.valueOf(dualPanePrefsValue));
-        updateDualPanePrefs(dualPanePrefsValue);
-    }
+        if (mUserInterfaceGeneral != null) {
+            if (!getResources().getBoolean(R.bool.config_show_user_interface_dual_pane)) {
+                getPreferenceScreen().removePreference((PreferenceCategory) findPreference(USER_INTERFACE_CATEGORY_GENERAL));
+                getPreferenceScreen().removePreference(mDualPanePrefs);
+                mUserInterfaceGeneral = null;
+            } else {
+                mDualPanePrefs.setOnPreferenceChangeListener(this);
+                int dualPanePrefsValue = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                        Settings.System.DUAL_PANE_PREFS, 0);
+                mDualPanePrefs.setValue(String.valueOf(dualPanePrefsValue));
+                updateDualPanePrefs(dualPanePrefsValue);
+            }
+        }
+
+        // Display
+        // Wake up plugged/unplugged
+        mUserInterfaceDisplay = (PreferenceCategory) prefSet.findPreference(USER_INTERFACE_CATEGORY_DISPLAY);
+        mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
+        mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
+        }
 
     private void updateDualPanePrefs(int value) {
         Resources res = getResources();
@@ -60,6 +87,17 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     : R.string.dual_pane_prefs_on);
             mDualPanePrefs.setSummary(res.getString(R.string.dual_pane_prefs_summary, direction));
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mWakeUpWhenPluggedOrUnplugged) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
+                    mWakeUpWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {

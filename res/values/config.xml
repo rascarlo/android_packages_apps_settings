@@ -26,7 +26,7 @@
     <bool name="has_led_flash">false</bool>
     
     <!-- User interface -->
-    <bool name="config_show_user_interface">false</bool>
+    <bool name="config_show_user_interface_dual_pane">false</bool>
 
     <!-- TODO: This is purely enforced by the interface, and does not affect what
          strings may be inserted into the actual content provider.
