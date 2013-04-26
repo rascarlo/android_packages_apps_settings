@@ -31,18 +31,7 @@
         android:entryValues="@array/values_dual_pane_prefs" />
     
     </PreferenceCategory>
-    
-    <PreferenceCategory
-        android:key="user_interface_category_display"
-        android:title="@string/user_interface_category_display">
-    
-    <CheckBoxPreference
-        android:key="wakeup_when_plugged_unplugged"
-        android:title="@string/wakeup_when_plugged_unplugged_title"
-        android:defaultValue="true" />
-    
-    </PreferenceCategory>
-    
+
     <PreferenceCategory
         android:key="user_interface_category_sound_volume"
         android:title="@string/user_interface_category_sound_volume">
@@ -69,6 +58,11 @@
     
     <PreferenceCategory
             android:title="@string/power_notifications_category_title">
+
+    <CheckBoxPreference
+        android:key="wakeup_when_plugged_unplugged"
+        android:title="@string/wakeup_when_plugged_unplugged_title"
+        android:defaultValue="true" />
 
     <CheckBoxPreference
             android:key="power_notifications"

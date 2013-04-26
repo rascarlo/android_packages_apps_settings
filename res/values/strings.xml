@@ -4598,10 +4598,7 @@
     <string name="dual_pane_prefs_off">Off</string>
     <string name="dual_pane_prefs_landscape">Only in landscape</string>
     
-    <!-- Wake up on charger -->
-    <string name="user_interface_category_display">Display</string>
-    <string name="wakeup_when_plugged_unplugged_title">Wake up when plugged/unplugged</string>
-    
+
     <string name="user_interface_category_sound_volume">Sound &amp; volume</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="volume_adjust_sounds_enable_title">Volume adjust sound</string>
@@ -4619,10 +4616,13 @@
          [CHAR LIMIT=40] -->
     <string name="power_notifications_category_title">Plug-in prompt</string>
 
+    <!-- Wake up on charger -->
+    <string name="wakeup_when_plugged_unplugged_title">Wake up when plugged/unplugged</string>
+
     <!-- Sound settings, power notifications enable/disable, setting check box label -->
-    <string name="power_notifications_enable_title">Enable</string>
+    <string name="power_notifications_enable_title">Enable sound</string>
     <!-- Sound settings, power notifications vibrate enable/disable, setting check box label -->
-    <string name="power_notifications_vibrate_title">Vibrate</string>
+    <string name="power_notifications_vibrate_title">Enable vibration</string>
     <!-- Sound settings, power notifications ringtone selection, preference label -->
     <string name="power_notifications_ringtone_title">Notification sound</string>
     <!-- Sound settings, power notifications label for ringtone == none -->
