@@ -4617,7 +4617,7 @@
     
     <!-- Category title for power sound notification specific Settings.
          [CHAR LIMIT=40] -->
-    <string name="power_notifications_category_title">Plug-in sounds</string>
+    <string name="power_notifications_category_title">Plug-in prompt</string>
 
     <!-- Sound settings, power notifications enable/disable, setting check box label -->
     <string name="power_notifications_enable_title">Enable</string>
