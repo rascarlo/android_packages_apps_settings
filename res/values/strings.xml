@@ -4502,6 +4502,7 @@
     <!-- Navigation Bar Color -->
     <string name="navigation_button_color_title">Button color overlay</string>
     <string name="dialog_indicator_color_title">Select color</string>
+    <string name="dialog_indicator_color_holo_blue_light">Holo blue light</string>
     
     <!-- Navigation button glow time and color -->
     <string name="navigation_button_glow_color_title">Button glow color</string>

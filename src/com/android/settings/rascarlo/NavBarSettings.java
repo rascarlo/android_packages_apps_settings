@@ -82,6 +82,7 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
                     getActivity().getApplicationContext().getResources().getColor(
                     com.android.internal.R.color.transparent)));
             mColorPicker.setDefaultColor(0x00000000);
+            mColorPicker.setHoloBlueColor(0xFF33B5E5);
             mColorPicker.show();
             return true;
         } else if (preference == mNavigationButtonGlowColor) {
@@ -91,6 +92,7 @@ public class NavBarSettings extends SettingsPreferenceFragment implements OnPref
                     getActivity().getApplicationContext().getResources().getColor(
                     com.android.internal.R.color.transparent)));
             mColorPicker.setDefaultColor(0x00000000);
+            mColorPicker.setHoloBlueColor(0xFF33B5E5);
             mColorPicker.show();
             return true;
         }

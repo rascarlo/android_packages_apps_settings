@@ -299,6 +299,8 @@ public class ColorPickerDialog extends Dialog {
     private SeekBar mTransparencyBar;
     private Button mDefaultButton;
     private int mDefaultColor = 0x00000000;
+    private Button mHoloBlueButton;
+    private int mHoloBlueColor = 0xFF33B5E5;
 
     public ColorPickerDialog(Context context, OnColorChangedListener listener, int initialColor) {
         super(context);
@@ -319,7 +321,6 @@ public class ColorPickerDialog extends Dialog {
         layoutParams.setMargins(10, 0, 10, 5);
 
         TextView tv = new TextView(mContext);
-        tv.setText(com.android.settings.R.string.dialog_indicator_color_title);
         layout.addView(tv, layoutParams);
 
         mDefaultButton = new Button(mContext);
@@ -335,6 +336,21 @@ public class ColorPickerDialog extends Dialog {
              }
          });
         layout.addView(mDefaultButton, layoutParams);
+        
+        mHoloBlueButton = new Button(mContext);
+        mHoloBlueButton.setBackgroundColor(mDefaultColor);
+        mHoloBlueButton.setClickable(true);
+        mHoloBlueButton.setFocusable(true);
+        mHoloBlueButton.setText(com.android.settings.R.string.dialog_indicator_color_holo_blue_light);
+        mHoloBlueButton.setTextColor(mHoloBlueColor);
+        mHoloBlueButton.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                mColorPickerView.setCenterColor(mHoloBlueColor);
+                mEditText.setText(convertToARGB(mHoloBlueColor));
+                mTransparencyBar.setProgress(Color.alpha(mHoloBlueColor));
+             }
+         });
+        layout.addView(mHoloBlueButton, layoutParams);
 
         mColorPickerView = new ColorPickerView(getContext(), onColorChangedListener, mInitialColor);
         layout.addView(mColorPickerView, layoutParams);
@@ -367,6 +383,10 @@ public class ColorPickerDialog extends Dialog {
 
     public void setDefaultColor(int color) {
         mDefaultColor = color;
+    }
+
+    public void setHoloBlueColor(int color) {
+        mHoloBlueColor = color;
     }
 
     private SeekBar.OnSeekBarChangeListener onTransparencyChangedListener = new SeekBar.OnSeekBarChangeListener() {
