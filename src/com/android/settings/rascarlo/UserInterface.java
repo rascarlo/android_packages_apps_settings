@@ -19,7 +19,6 @@ package com.android.settings.rascarlo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -29,7 +28,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.view.VolumePanel;
@@ -39,9 +37,6 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
     
-    private static final String USER_INTERFACE_CATEGORY_GENERAL = "user_interface_category_general";
-
-    private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
@@ -56,8 +51,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     // Used for power notification uri string if set to silent
     private static final String POWER_NOTIFICATIONS_SILENT_URI = "silent";
 
-    private PreferenceCategory mUserInterfaceGeneral;
-    private ListPreference mDualPanePrefs;
     private CheckBoxPreference mVolumeAdjustSounds;
     private ListPreference mVolumeOverlay;
     private CheckBoxPreference mSafeHeadsetVolume;
@@ -71,26 +64,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.user_interface);
-
-        PreferenceScreen prefSet = getPreferenceScreen();
-
-        // General
-        // Dual pane, only show on selected devices
-        mUserInterfaceGeneral = (PreferenceCategory) prefSet.findPreference(USER_INTERFACE_CATEGORY_GENERAL);
-        mDualPanePrefs = (ListPreference) prefSet.findPreference(DUAL_PANE_PREFS);
-        if (mUserInterfaceGeneral != null) {
-            if (!getResources().getBoolean(R.bool.config_show_user_interface_dual_pane)) {
-                getPreferenceScreen().removePreference((PreferenceCategory) findPreference(USER_INTERFACE_CATEGORY_GENERAL));
-                getPreferenceScreen().removePreference(mDualPanePrefs);
-                mUserInterfaceGeneral = null;
-            } else {
-                mDualPanePrefs.setOnPreferenceChangeListener(this);
-                int dualPanePrefsValue = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                        Settings.System.DUAL_PANE_PREFS, 0);
-                mDualPanePrefs.setValue(String.valueOf(dualPanePrefsValue));
-                updateDualPanePrefs(dualPanePrefsValue);
-            }
-        }
 
         // Volume and Sound
         // Volume adjust sound
@@ -159,19 +132,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         }
         }
 
-    private void updateDualPanePrefs(int value) {
-        Resources res = getResources();
-        if (value == 0) {
-            /* dual pane deactivated */
-            mDualPanePrefs.setSummary(res.getString(R.string.dual_pane_prefs_off));
-        } else {
-            String direction = res.getString(value == 2
-                    ? R.string.dual_pane_prefs_landscape
-                    : R.string.dual_pane_prefs_on);
-            mDualPanePrefs.setSummary(res.getString(R.string.dual_pane_prefs_summary, direction));
-        }
-    }
-
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mVolumeAdjustSounds) {
@@ -202,13 +162,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mDualPanePrefs) {
-            int dualPanePrefsValue = Integer.valueOf((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.DUAL_PANE_PREFS, dualPanePrefsValue);
-            updateDualPanePrefs(dualPanePrefsValue);
-            getActivity().recreate();
-        } else if (preference == mVolumeOverlay) {
+        if (preference == mVolumeOverlay) {
             final int value = Integer.valueOf((String) objValue);
             final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
             Settings.System.putInt(getContentResolver(),
