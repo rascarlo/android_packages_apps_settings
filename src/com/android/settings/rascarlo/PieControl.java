@@ -22,6 +22,7 @@ public class PieControl extends SettingsPreferenceFragment
 
     private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
     private static final String PIE_CONTROL = "pie_control_checkbox";
+    private static final String SEARCH_BUTTON = "pie_control_search";
     private static final String PIE_SIZE = "pie_control_size";
     private static final String[] TRIGGER = {
         "pie_control_trigger_left",
@@ -32,6 +33,7 @@ public class PieControl extends SettingsPreferenceFragment
 
     ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mPieControl;
+    private CheckBoxPreference mSearchButton;
     private SeekBarDialogPreference mPieSize;
     private CheckBoxPreference[] mTrigger = new CheckBoxPreference[4];
 
@@ -57,6 +59,8 @@ public class PieControl extends SettingsPreferenceFragment
 
         mPieControl = (CheckBoxPreference) prefSet.findPreference(PIE_CONTROL);
         mPieControl.setOnPreferenceChangeListener(this);
+        mSearchButton = (CheckBoxPreference) prefSet.findPreference(SEARCH_BUTTON);
+        mSearchButton.setOnPreferenceChangeListener(this);
         mPieSize = (SeekBarDialogPreference) prefSet.findPreference(PIE_SIZE);
 
         for (int i = 0; i < TRIGGER.length; i++) {
@@ -82,6 +86,10 @@ public class PieControl extends SettingsPreferenceFragment
                     Settings.System.PIE_CONTROLS, newState ? 1 : 0);
             propagatePieControl(newState);
 
+        } else if (preference == mSearchButton) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.PIE_SEARCH, (Boolean) newValue ? 1 : 0);
+
         } else {
             int triggerSlots = 0;
             for (int i = 0; i < mTrigger.length; i++) {
@@ -92,7 +100,7 @@ public class PieControl extends SettingsPreferenceFragment
                 }
             }
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.PIE_POSITIONS, triggerSlots);
+                    Settings.System.PIE_GRAVITY, triggerSlots);
         }
         return true;
     }
@@ -105,8 +113,11 @@ public class PieControl extends SettingsPreferenceFragment
                 Settings.System.PIE_CONTROLS, 0) == 1);
         propagatePieControl(mPieControl.isChecked());
 
+        mSearchButton.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.PIE_SEARCH, 0) == 1);
+
         getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.PIE_POSITIONS), true,
+                Settings.System.getUriFor(Settings.System.PIE_GRAVITY), true,
                 mPieTriggerObserver);
 
         updatePieTriggers();
@@ -119,6 +130,7 @@ public class PieControl extends SettingsPreferenceFragment
     }
 
     private void propagatePieControl(boolean value) {
+        mSearchButton.setEnabled(value);
         for (int i = 0; i < mTrigger.length; i++) {
             mTrigger[i].setEnabled(value);
         }
@@ -127,7 +139,7 @@ public class PieControl extends SettingsPreferenceFragment
 
     private void updatePieTriggers() {
         int triggerSlots = Settings.System.getInt(getContentResolver(),
-                Settings.System.PIE_POSITIONS, DEFAULT_POSITION);
+                Settings.System.PIE_GRAVITY, DEFAULT_POSITION);
 
         for (int i = 0; i < mTrigger.length; i++) {
             if ((triggerSlots & (0x01 << i)) != 0) {
