@@ -34,7 +34,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "SystemSettings";
 
     private static final String KEY_USER_INTERFACE = "user_interface";
-    private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_STATUS_BAR = "status_bar";
     private static final String KEY_NAVIGATION_BAR = "navigation_bar";
     private static final String KEY_NAVIGATION_RING = "navigation_ring";
@@ -46,7 +45,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String QUICK_PULLDOWN = "quick_pulldown";
 
     private PreferenceScreen mUserInterface;
-    private PreferenceScreen mPieControl;
     private PreferenceScreen mNotificationPulse;
     private PreferenceCategory mQuickSettingsCategory;
     private ListPreference mQuickPulldown;
@@ -74,9 +72,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         // User Interface. Only show on selected devices
         mUserInterface = (PreferenceScreen) findPreference(KEY_USER_INTERFACE);
 
-        // Pie controls
-        mPieControl = (PreferenceScreen) findPreference(KEY_PIE_CONTROL);
-
         // Notification lights
         mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
         if (mNotificationPulse != null) {
@@ -102,15 +97,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
                 updatePulldownSummary(quickPulldownValue);
             }
         }
-
-    private void updatePieControlDescription() {
-        if (Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.PIE_CONTROLS, 0) == 1) {
-            mPieControl.setSummary(getString(R.string.pie_control_enabled));
-        } else {
-            mPieControl.setSummary(getString(R.string.pie_control_disabled));
-        }
-    }
 
     private void updateLightPulseDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
@@ -150,9 +136,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         super.onResume();
         if (mNotificationPulse != null) {
             updateLightPulseDescription();
-        }
-        if (mPieControl != null) {
-            updatePieControlDescription();
         }
     }
 

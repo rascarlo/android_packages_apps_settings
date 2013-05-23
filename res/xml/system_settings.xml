@@ -10,11 +10,6 @@
         android:fragment="com.android.settings.rascarlo.UserInterface"
         android:title="@string/user_interface_title" />
 
-    <PreferenceScreen
-        android:key="pie_control"
-        android:fragment="com.android.settings.rascarlo.PieControl"
-        android:title="@string/pie_control_title" />
-
      <PreferenceScreen
         android:key="status_bar"
         android:fragment="com.android.settings.rascarlo.StatusBar"

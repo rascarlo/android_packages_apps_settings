@@ -4588,19 +4588,6 @@
     <string name="volume_key_cursor_control_on">Volume up/down moves cursor left/right</string>
     <string name="volume_key_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
 
-    <!-- Quick/Pie Control -->
-    <string name="pie_control_title">Pie controls</string>
-    <string name="pie_control_enabled">Pie enabled when expanded desktop is active</string>
-    <string name="pie_control_disabled">Pie disabled</string>
-    <string name="pie_control_search_title">Show search button</string>
-    <string name="pie_control_size">Navigation key size</string>
-    <string name="pie_control_trigger_positions">Trigger positions</string>
-    <string name="pie_control_trigger_left">Left screen edge</string>
-    <string name="pie_control_trigger_bottom">Bottom screen edge</string>
-    <string name="pie_control_trigger_right">Right screen edge</string>
-    <string name="pie_control_trigger_top">Top screen edge</string>
-    <string name="pie_control_trigger_top_summary">Only navigation will be displayed at top</string>
-
     <!--  User Interface -->
     <string name="user_interface_title">User interface</string>
 
