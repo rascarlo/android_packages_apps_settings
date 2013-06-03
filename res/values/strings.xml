@@ -4385,7 +4385,7 @@
     <string name="header_category_interface">RASBEANJELLY</string>
     
     <string name="ok">OK</string>
-    <string name="profile_applist_title">Applications</string>
+    <string name="profile_applist_title">Apps</string>
     <string name="profile_reset_title">Reset</string>
         
     <!-- System Interface settings  -->
@@ -4437,11 +4437,11 @@
     <string name="lockscreen_target_reset_message">Delete all user created lock screen shortcuts and restore to default?</string>
     <string name="lockscreen_target_empty">Empty</string>
     <string name="lockscreen_target_edit_title">Edit shortcut and icon</string>
-    <string name="lockscreen_target_edit_msg">Select or change the desired application or activity and the associated icon</string>
+    <string name="lockscreen_target_edit_msg">Select or change the desired app or activity and the associated icon</string>
 
     <!-- Lock screen shortcuts -->
     <string name="picker_activities">Activities</string>
-    <string name="select_custom_app_title">Select custom application</string>
+    <string name="select_custom_app_title">Select custom app</string>
     <string name="select_custom_activity_title">Select custom activity</string>
     <string name="icon_picker_choose_icon_title">Choose icon</string>
     <string name="icon_picker_alarm">Alarm</string>
@@ -4528,10 +4528,10 @@
     <!-- Display settings screen, notification light settings -->
     <string name="category_notification_pulse_title">LED customization</string>
     <string name="notification_pulse_title">Notification light</string>
-    <string name="notification_light_add_app">Add application</string>
-    <string name="notification_light_choose_app">Choose application</string>
+    <string name="notification_light_add_app">Add app</string>
+    <string name="notification_light_choose_app">Choose app</string>
     <string name="notification_light_general_title">General</string>
-    <string name="notification_light_applist_title">Applications</string>
+    <string name="notification_light_applist_title">Apps</string>
     <string name="notification_light_phonelist_title">Phone</string>
     <string name="notification_light_use_custom">Use custom values</string>
     <string name="notification_light_enabled">Enabled</string>
