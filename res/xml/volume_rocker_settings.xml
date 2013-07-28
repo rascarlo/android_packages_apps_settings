@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/volume_rocker_category_title" >
+
+    <CheckBoxPreference
+        android:key="volume_adjust_sounds"
+        android:persistent="false"
+        android:summary="@string/volume_adjust_sounds_enable_summary"
+        android:title="@string/volume_adjust_sounds_enable_title" />
+
+</PreferenceScreen>
