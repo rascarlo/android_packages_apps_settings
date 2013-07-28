@@ -4,4 +4,9 @@
     <!-- About phone screen, build date of ROM -->
     <string name="build_date">rasbeanjelly build date</string>
     <string name="build_date_default">2012-01-01-0000</string>
+    
+    <!-- Volume Adjust sound -->
+    <string name="volume_adjust_sounds_enable_title">Volume adjustment sound</string>
+    <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with volume rocker</string>
+
 </resources>
