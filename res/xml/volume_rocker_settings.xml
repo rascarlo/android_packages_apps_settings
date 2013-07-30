@@ -9,9 +9,17 @@
         android:title="@string/volume_adjust_sounds_enable_title" />
 
     <ListPreference
-            android:key="volume_overlay"
-            android:title="@string/volume_overlay_title"
-            android:entries="@array/volume_overlay_entries"
-            android:entryValues="@array/volume_overlay_values" />
+        android:entries="@array/volume_overlay_entries"
+        android:entryValues="@array/volume_overlay_values"
+        android:key="volume_overlay"
+        android:title="@string/volume_overlay_title" />
+
+    <ListPreference
+        android:dialogTitle="@string/volume_key_cursor_control_title"
+        android:entries="@array/volume_key_cursor_control_entries"
+        android:entryValues="@array/volume_key_cursor_control_values"
+        android:key="volume_key_cursor_control"
+        android:persistent="false"
+        android:title="@string/volume_key_cursor_control_title" />
 
 </PreferenceScreen>
