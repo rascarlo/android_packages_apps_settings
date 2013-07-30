@@ -21,10 +21,16 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
     private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     // volume cursor control
     private static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+    // volume rocker wake
+    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+    // volume rocker music control
+    private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
 
     private CheckBoxPreference mVolumeAdjustSounds;
     private ListPreference mVolumeOverlay;
     private ListPreference mVolumeKeyCursorControl;
+    private CheckBoxPreference mVolumeWake;
+    private CheckBoxPreference mVolBtnMusicCtrl;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,14 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
                     .getContentResolver(), Settings.System.VOLUME_KEY_CURSOR_CONTROL, 0)));
             mVolumeKeyCursorControl.setSummary(mVolumeKeyCursorControl.getEntry());
         }
+
+        mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
+        mVolumeWake.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
+
+        mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
+        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.VOLBTN_MUSIC_CONTROLS, 0) == 1);
     }
 
     @Override
@@ -59,6 +73,18 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
             Settings.System.putInt(getContentResolver(),
                     Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
                     mVolumeAdjustSounds.isChecked() ? 1 : 0);
+            return true;
+
+        } else if (preference == mVolumeWake) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.VOLUME_WAKE_SCREEN,
+                    mVolumeWake.isChecked() ? 1 : 0);
+            return true;
+
+        } else if (preference == mVolBtnMusicCtrl) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.VOLBTN_MUSIC_CONTROLS,
+                    mVolBtnMusicCtrl.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);

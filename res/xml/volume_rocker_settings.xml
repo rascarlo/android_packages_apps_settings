@@ -22,4 +22,16 @@
         android:persistent="false"
         android:title="@string/volume_key_cursor_control_title" />
 
+    <CheckBoxPreference
+        android:key="pref_volume_wake"
+        android:title="@string/pref_volume_wake_title"
+        android:summary="@string/pref_volume_wake_summary"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="volbtn_music_controls"
+        android:title="@string/volbtn_music_controls_title"
+        android:summary="@string/volbtn_music_controls_summary"
+        android:persistent="false" />
+
 </PreferenceScreen>
