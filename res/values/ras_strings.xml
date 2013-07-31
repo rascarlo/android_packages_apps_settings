@@ -60,4 +60,11 @@
    <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across status bar</string>
     <string name="status_bar_toggle_info">Automatic brightness must be disabled</string>
-</resources>
+
+    <!-- Status bar battery -->
+    <string name="status_bar_battery_title">Battery status style</string>
+    <string name="status_bar_style_icon">Icon</string>
+    <string name="status_bar_style_hidden">Hidden</string>
+    <string name="status_bar_battery_status_percentage">Icon &amp; Percentage</string>
+    
+    </resources>

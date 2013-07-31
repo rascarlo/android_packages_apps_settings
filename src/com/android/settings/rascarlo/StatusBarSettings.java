@@ -20,9 +20,11 @@ OnPreferenceChangeListener {
 
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    private static final String STATUS_BAR_BATTERY = "status_bar_battery";
 
     private ListPreference mQuickPulldown;
     private CheckBoxPreference mStatusBarBrightnessControl;
+    private ListPreference mStatusBarBattery;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,10 @@ OnPreferenceChangeListener {
         updatePulldownSummary(quickPulldownValue);
 
         // Status bar brightness control
-        mStatusBarBrightnessControl = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
-        mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        mStatusBarBrightnessControl = (CheckBoxPreference) getPreferenceScreen().findPreference(
+                STATUS_BAR_BRIGHTNESS_CONTROL);
+        mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity()
+                .getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
         try {
             if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -56,6 +60,16 @@ OnPreferenceChangeListener {
         if (Utils.isTablet(getActivity())) {
             getPreferenceScreen().removePreference(mStatusBarBrightnessControl);
         }
+
+        // status bar battery
+        mStatusBarBattery = (ListPreference) getPreferenceScreen().findPreference(
+                STATUS_BAR_BATTERY);
+        int statusBarBattery = Settings.System.getInt(getActivity().getApplicationContext()
+                .getContentResolver(),
+                Settings.System.STATUS_BAR_BATTERY, 0);
+        mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
+        mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
+        mStatusBarBattery.setOnPreferenceChangeListener(this);
     }
 
     private void updatePulldownSummary(int value) {
@@ -77,7 +91,13 @@ OnPreferenceChangeListener {
                     Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
             updatePulldownSummary(quickPulldownValue);
             return true;
-
+        } else if (preference == mStatusBarBattery) {
+            int statusBarBattery = Integer.valueOf((String) objValue);
+            int index = mStatusBarBattery.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
+            mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
+            return true;
         }
         return false;
     }
