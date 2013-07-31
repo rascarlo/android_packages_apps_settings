@@ -30,7 +30,7 @@
     <string name="system_interface_title">Build Tweaks</string>
     
     <!-- Volume rocker behaviours -->
-    <string name="volume_rocker_category_title">Volume rocker behaviors</string>
+    <string name="volume_rocker_category_title">Volume rocker</string>
     
      <!--- Volume key cursor control -->
     <string name="volume_key_cursor_control_title">Volume key cursor control</string>
