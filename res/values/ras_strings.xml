@@ -45,5 +45,14 @@
     <!-- Volume rocker music control -->
     <string name="volbtn_music_controls_title">Volume rocker music controls</string>
     <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
-    
+
+    <!-- Status bar  -->
+    <string name="status_bar_title">Status bar</string>
+    <string name="quick_pulldown_title">Quick Settings pulldown</string>
+    <string name="quick_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
+    <string name="quick_pulldown_summary_left">Left</string>
+    <string name="quick_pulldown_summary_right">Right</string>
+    <string name="quick_pulldown_off">Off</string>
+    <string name="quick_pulldown_left">Left</string>
+    <string name="quick_pulldown_right">Right</string>
 </resources>
