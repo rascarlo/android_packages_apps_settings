@@ -10,6 +10,11 @@
         android:fragment="com.android.settings.rascarlo.StatusBarSettings"
         android:title="@string/status_bar_title" />
 
+     <PreferenceScreen
+        android:key="navigation_bar"
+        android:fragment="com.android.settings.rascarlo.NavigationBarSettings"
+        android:title="@string/navigation_bar_title" />
+
     <PreferenceScreen
         android:key="volume_rocker_settings"
         android:fragment="com.android.settings.rascarlo.VolumeRocker"
