@@ -37,7 +37,7 @@ OnPreferenceChangeListener {
                 .getContentResolver(),
                 Settings.System.QS_QUICK_PULLDOWN, 0);
         mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
-        updatePulldownSummary(quickPulldownValue);
+        mQuickPulldown.setSummary(mQuickPulldown.getEntry());
 
         // Status bar brightness control
         mStatusBarBrightnessControl = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
@@ -59,24 +59,13 @@ OnPreferenceChangeListener {
         }
     }
 
-    private void updatePulldownSummary(int value) {
-        Resources res = getResources();
-        if (value == 0) {
-            /* quick pulldown deactivated */
-            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_off));
-        } else {
-            String direction = res.getString(value == 2
-                    ? R.string.quick_pulldown_summary_left : R.string.quick_pulldown_summary_right);
-            mQuickPulldown.setSummary(res.getString(R.string.quick_pulldown_summary, direction));
-        }
-    }
-
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mQuickPulldown) {
             int quickPulldownValue = Integer.valueOf((String) objValue);
+            int quickPulldownIndex = mQuickPulldown.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
-            updatePulldownSummary(quickPulldownValue);
+            mQuickPulldown.setSummary(mQuickPulldown.getEntries()[quickPulldownIndex]);
             return true;
 
         }
