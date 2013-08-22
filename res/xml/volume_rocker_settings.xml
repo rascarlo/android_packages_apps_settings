@@ -29,7 +29,13 @@
         android:title="@string/volume_adjust_sounds_enable_title"
         android:summary="@string/volume_adjust_sounds_enable_summary"
         android:persistent="false" />
-    
+
+    <ListPreference
+        android:key="volume_overlay"
+        android:title="@string/volume_overlay_title"
+        android:entries="@array/volume_overlay_entries"
+        android:entryValues="@array/volume_overlay_values" />
+
     <CheckBoxPreference
         android:key="safe_headset_volume"
         android:title="@string/safe_headset_volume_title"

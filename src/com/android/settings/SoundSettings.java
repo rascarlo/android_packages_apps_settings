@@ -60,7 +60,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
 
-    private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     private static final String KEY_VIBRATE = "vibrate_when_ringing";
     private static final String KEY_RING_VOLUME = "ring_volume";
     private static final String KEY_MUSICFX = "musicfx";
@@ -87,7 +86,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final int MSG_UPDATE_NOTIFICATION_SUMMARY = 2;
 
     private CheckBoxPreference mVibrateWhenRinging;
-    private ListPreference mVolumeOverlay;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
@@ -143,14 +141,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             // device is not CDMA, do not display CDMA emergency_tone
             getPreferenceScreen().removePreference(findPreference(KEY_EMERGENCY_TONE));
         }
-
-        mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
-        mVolumeOverlay.setOnPreferenceChangeListener(this);
-        int volumeOverlay = Settings.System.getInt(getContentResolver(),
-                Settings.System.MODE_VOLUME_OVERLAY,
-                VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
-        mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
-        mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
 
         if (getResources().getBoolean(com.android.internal.R.bool.config_useFixedVolume)) {
             // device with fixed volume policy, do not display volumes submenu
@@ -358,12 +348,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
-        } else if (preference == mVolumeOverlay) {
-            final int value = Integer.valueOf((String) objValue);
-            final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.MODE_VOLUME_OVERLAY, value);
-            mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
         }
 
         return true;
