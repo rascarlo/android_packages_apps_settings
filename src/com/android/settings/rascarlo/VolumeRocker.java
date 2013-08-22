@@ -16,11 +16,13 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_SAFE_HEADSET_VOLUME = "safe_headset_volume";
 
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolBtnMusicCtrl;
     private ListPreference mVolumeKeyCursorControl;
+    private CheckBoxPreference mVolumeAdjustSounds;
     private CheckBoxPreference mSafeHeadsetVolume;
 
     @Override
@@ -48,6 +50,11 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
             mVolumeKeyCursorControl.setSummary(mVolumeKeyCursorControl.getEntry());
         }
 
+        // Volume adjust sound
+        mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
+        mVolumeAdjustSounds.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
+
         // volume safe head set
         mSafeHeadsetVolume = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
         mSafeHeadsetVolume.setPersistent(false);
@@ -69,6 +76,11 @@ public class VolumeRocker extends SettingsPreferenceFragment implements OnPrefer
                     Settings.System.VOLBTN_MUSIC_CONTROLS,
                     mVolBtnMusicCtrl.isChecked()
                     ? 1 : 0);
+         } else if (preference == mVolumeAdjustSounds) {
+             Settings.System.putInt(getActivity().getContentResolver(),
+                     Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
+                     mVolumeAdjustSounds.isChecked()
+                     ? 1 : 0);
          } else if (preference == mSafeHeadsetVolume) {
              Settings.System.putInt(getActivity().getContentResolver(),
                      Settings.System.SAFE_HEADSET_VOLUME,
