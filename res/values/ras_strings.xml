@@ -49,6 +49,8 @@
 
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_quick_settings_category">Quick Settings</string>
+    <string name="status_bar_general_category">General</string>
     <string name="quick_pulldown_title">Quick Settings pulldown</string>
     <string name="quick_pulldown_off">Off</string>
     <string name="quick_pulldown_left">Left</string>
