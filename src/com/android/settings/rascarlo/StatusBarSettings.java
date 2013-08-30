@@ -17,12 +17,18 @@ import com.android.settings.Utils;
 public class StatusBarSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
+    private static final String STATUS_BAR_CLOCK_CATEGORY = "status_bar_clock_category";
+    private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
+    private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     private static final String QUICK_SETTINGS_CATEGORY = "status_bar_quick_settings_category";
     private static final String QUICK_PULLDOWN = "status_bar_quick_pulldown";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
 
+    private PreferenceCategory mStatusBarClockCategory;
+    private ListPreference mStatusBarAmPm;
+    private CheckBoxPreference mStatusBarClock;
     private PreferenceCategory mStatusBarGeneralCategory;
     private ListPreference mStatusBarBattery;
     private PreferenceCategory mQuickSettingsCategory;
@@ -34,6 +40,30 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.status_bar_settings);
+
+        // Clock
+        mStatusBarClockCategory = (PreferenceCategory) findPreference(STATUS_BAR_CLOCK_CATEGORY);
+        mStatusBarClock = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_CLOCK);
+        mStatusBarClock.setChecked((Settings.System.getInt(getActivity().
+                getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_CLOCK, 1) == 1));
+
+        // Am-Pm
+        mStatusBarAmPm = (ListPreference) getPreferenceScreen().findPreference(STATUS_BAR_AM_PM);
+        try {
+            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.TIME_12_24) == 24) {
+                mStatusBarAmPm.setEnabled(false);
+                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
+            }
+        } catch (SettingNotFoundException e ) {
+        }
+
+        int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_AM_PM, 2);
+        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
+        mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
+        mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
         // Battery
         mStatusBarGeneralCategory = (PreferenceCategory) findPreference(STATUS_BAR_GENERAL_CATEGORY);
@@ -85,13 +115,25 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
 
-        if (preference == mStatusBarBattery) {
+        // Am-Pm
+        if (preference == mStatusBarAmPm) {
+            int statusBarAmPm = Integer.valueOf((String) objValue);
+            int indexAmPm = mStatusBarAmPm.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().
+                    getContentResolver(), Settings.System.STATUS_BAR_AM_PM, statusBarAmPm);
+            mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[indexAmPm]);
+            return true;
+
+        // Battery
+        } else if (preference == mStatusBarBattery) {
             int statusBarBattery = Integer.valueOf((String) objValue);
             int indexBattery = mStatusBarBattery.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext()
                     .getContentResolver(), Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
             mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[indexBattery]);
             return true;
+
+        // QuickPullDown
         } else if (preference == mQuickPulldown) {
             int quickPulldownValue = Integer.valueOf((String) objValue);
             int quickPulldownIndex = mQuickPulldown.findIndexOfValue((String) objValue);
@@ -106,7 +148,16 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
         boolean value;
-        if (preference == mStatusBarBrightnessControl) {
+        
+        // Clock
+        if (preference == mStatusBarClock) {
+            value = mStatusBarClock.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_CLOCK, value ? 1 : 0);
+            return true;
+
+            // Brightness control
+        } else if (preference == mStatusBarBrightnessControl) {
             value = mStatusBarBrightnessControl.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);

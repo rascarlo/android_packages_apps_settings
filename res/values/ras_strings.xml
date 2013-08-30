@@ -45,19 +45,28 @@
 
     <!-- Volume rocker music control -->
     <string name="volbtn_music_controls_title">Volume rocker music controls</string>
-    <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
+    <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume keys will seek music tracks</string>
 
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
-    <string name="status_bar_quick_settings_category">Quick Settings</string>
     <string name="status_bar_general_category">General</string>
+    
+    <!-- Status bar quick pull down -->
+    <string name="status_bar_quick_settings_category">Quick Settings</string>
     <string name="quick_pulldown_title">Quick Settings pulldown</string>
     <string name="quick_pulldown_off">Off</string>
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
-    
+
+    <!-- Status bar clock -->
+    <string name="status_bar_clock_title">Clock</string>
+    <string name="status_bar_general_title">General</string>
+    <string name="status_bar_show_clock_title">Show clock</string>
+    <string name="status_bar_am_pm_title">AM/PM style</string>
+    <string name="status_bar_am_pm_info">24-hour clock must be disabled</string>
+
     <!-- Status bar brightness control -->
-   <string name="status_bar_toggle_brightness">Brightness control</string>
+    <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across status bar</string>
     <string name="status_bar_toggle_info">Automatic brightness must be disabled</string>
 
@@ -65,7 +74,7 @@
     <string name="status_bar_battery_title">Battery status style</string>
     <string name="status_bar_style_icon">Icon</string>
     <string name="status_bar_style_hidden">Hidden</string>
-    <string name="status_bar_battery_status_percentage">Icon &amp; Percentage</string>
+    <string name="status_bar_battery_status_percentage">Icon &amp; percentage</string>
 
     <!-- Navigation Bar -->
     <string name="navigation_bar_title">Navigation bar</string>
