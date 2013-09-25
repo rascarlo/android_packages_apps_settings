@@ -104,7 +104,6 @@
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
     <string name="lockscreen_target_title">Lock screen shortcuts</string>
     <string name="lockscreen_target_reset">Lock screen shortcuts reset to default</string>
-    <string name="lockscreen_target_save">Lock screen shortcuts saved</string>
     <string name="lockscreen_target_reset_title">Reset</string>
     <string name="lockscreen_target_reset_message">Delete all user created lock screen shortcuts and restore to default?</string>
     <string name="lockscreen_target_empty">Empty</string>
@@ -151,7 +150,6 @@
     <string name="navigation_ring_title">Quick launch shortcuts</string>
     <string name="navring_target_reset_message">Delete all user created navigation bar shortcuts and restore to default?</string>
     <string name="navring_target_reset">Quick launch shortcuts reset to default</string>
-    <string name="navring_target_save">Quick launch shortcuts saved</string>
     <string name="navring_action_open_ime_switcher">Open IME Switcher</string>
     <string name="navring_action_kill_app">Kill app</string>
     <string name="navring_action_none">None</string>
