@@ -1,20 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/status_bar_title" >
 
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/status_bar_title">
-
+    <PreferenceCategory
+        android:key="status_bar_general_category"
+        android:title="@string/general_string" >
         <ListPreference
-            android:key="quick_pulldown"
-            android:title="@string/quick_pulldown_title"
             android:entries="@array/quick_pulldown_entries"
             android:entryValues="@array/quick_pulldown_values"
-            android:persistent="false" />
-        
+            android:key="quick_pulldown"
+            android:persistent="false"
+            android:title="@string/quick_pulldown_title" />
+
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="status_bar_brightness_control"
-            android:title="@string/status_bar_toggle_brightness"
             android:summary="@string/status_bar_toggle_brightness_summary"
-            android:defaultValue="false" />
+            android:title="@string/status_bar_toggle_brightness" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="status_bar_clock_category"
+        android:title="@string/status_bar_clock_title" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="status_bar_show_clock"
+            android:title="@string/status_bar_show_clock_title" />
+
+        <ListPreference
+            android:dependency="status_bar_show_clock"
+            android:dialogTitle="@string/status_bar_am_pm_title"
+            android:entries="@array/entries_status_bar_am_pm"
+            android:entryValues="@array/values_status_bar_am_pm"
+            android:key="status_bar_am_pm"
+            android:title="@string/status_bar_am_pm_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
