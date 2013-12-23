@@ -20,11 +20,13 @@ OnPreferenceChangeListener {
 
     private static final String QUICK_PULLDOWN = "quick_pulldown";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
 
     private ListPreference mQuickPulldown;
     private CheckBoxPreference mStatusBarBrightnessControl;
+    private CheckBoxPreference mStatusBarDoubleTapSleepGesture;
     private ListPreference mStatusBarAmPm;
     private CheckBoxPreference mStatusBarClock;
 
@@ -33,6 +35,10 @@ OnPreferenceChangeListener {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.status_bar_settings);
+        // double tap to sleep
+        mStatusBarDoubleTapSleepGesture = (CheckBoxPreference) getPreferenceScreen().findPreference(DOUBLE_TAP_SLEEP_GESTURE);
+            mStatusBarDoubleTapSleepGesture.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1));
 
         // Clock
             mStatusBarClock = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_CLOCK);
@@ -111,6 +117,12 @@ OnPreferenceChangeListener {
             value = mStatusBarBrightnessControl.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
+            return true;
+
+        } else if (preference == mStatusBarDoubleTapSleepGesture) {
+            value = mStatusBarDoubleTapSleepGesture.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, value ? 1: 0);
             return true;
 
         } else if (preference == mStatusBarClock) {
