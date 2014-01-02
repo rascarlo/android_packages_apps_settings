@@ -35,7 +35,7 @@
 
     <PreferenceScreen
         android:fragment="com.android.settings.rascarlo.NotificationLightSettings"
-        android:key="led_settings"
+        android:key="notification_pulse"
         android:title="@string/led_settings_category_title" />
 
 </PreferenceScreen>

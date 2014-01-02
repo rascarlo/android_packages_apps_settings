@@ -23,14 +23,13 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 
 public class SystemSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
-    private static final String KEY_LED_SETTINGS = "led_settings";
+    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
 
-    private PreferenceScreen mLedSettings;
+    private PreferenceScreen mNotificationPulse;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,12 +38,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.system_settings);
 
         // Led settings
-        mLedSettings = (PreferenceScreen) findPreference(KEY_LED_SETTINGS);
-        if (mLedSettings != null) {
+        mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
+        if (mNotificationPulse != null) {
             if (!getResources().getBoolean(
                     com.android.internal.R.bool.config_intrusiveNotificationLed)) {
-                getPreferenceScreen().removePreference(mLedSettings);
-                mLedSettings = null;
+                getPreferenceScreen().removePreference(mNotificationPulse);
+            } else {
+                updateLightPulseDescription();
             }
         }
     }
@@ -52,18 +52,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private void updateLightPulseDescription() {
         if (Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1) {
-            mLedSettings.setSummary(getString(R.string.enabled_string));
+            mNotificationPulse.setSummary(getString(R.string.enabled_string));
         } else {
-            mLedSettings.setSummary(getString(R.string.disabled_string));
+            mNotificationPulse.setSummary(getString(R.string.disabled_string));
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mLedSettings != null) {
-            updateLightPulseDescription();
-        }
+        updateLightPulseDescription();
     }
 
     @Override
