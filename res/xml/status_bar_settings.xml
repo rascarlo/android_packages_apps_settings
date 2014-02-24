@@ -18,10 +18,6 @@
             android:summary="@string/status_bar_toggle_brightness_summary"
             android:title="@string/status_bar_toggle_brightness" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="double_tap_sleep_gesture"
-            android:title="@string/status_bar_double_tap_to_sleep_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
