@@ -34,6 +34,11 @@
         android:title="@string/plug_in_prompt_settings_title" />
 
     <PreferenceScreen
+        android:fragment="com.android.settings.rascarlo.DoubleTapToSleepSettings"
+        android:key="double_tap_sleep"
+        android:title="@string/double_tap_sleep_title" />
+
+    <PreferenceScreen
         android:fragment="com.android.settings.rascarlo.NotificationLightSettings"
         android:key="notification_pulse"
         android:title="@string/led_settings_category_title" />

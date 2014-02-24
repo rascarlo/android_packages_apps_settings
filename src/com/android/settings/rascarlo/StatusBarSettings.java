@@ -21,8 +21,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
     private static String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
     // Brightness control
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-    // Double-tap to sleep
-    private static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
     // Status bar battery style
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     // Clock
@@ -38,8 +36,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
     private ListPreference mStatusBarBattery;
     // Brightness control
     private CheckBoxPreference mStatusBarBrightnessControl;
-    // Double-tap to sleep
-    private CheckBoxPreference mStatusBarDoubleTapSleepGesture;
     // Clock
     private ListPreference mStatusBarAmPm;
     private CheckBoxPreference mStatusBarClock;
@@ -71,11 +67,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
                 } catch (SettingNotFoundException e) {
                 }
             }
-
-            // Status bar double-tap to sleep
-            mStatusBarDoubleTapSleepGesture = (CheckBoxPreference) getPreferenceScreen().findPreference(DOUBLE_TAP_SLEEP_GESTURE);
-            mStatusBarDoubleTapSleepGesture.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1));
 
             // Status bar battery style
             mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
@@ -159,12 +150,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
             value = mStatusBarBrightnessControl.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
-            return true;
-
-        } else if (preference == mStatusBarDoubleTapSleepGesture) {
-            value = mStatusBarDoubleTapSleepGesture.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, value ? 1: 0);
             return true;
 
         } else if (preference == mStatusBarClock) {
