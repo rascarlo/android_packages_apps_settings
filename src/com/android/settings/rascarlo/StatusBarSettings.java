@@ -51,10 +51,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
             // General category
             mStatusBarGeneralCategory = (PreferenceCategory) findPreference(STATUS_BAR_GENERAL_CATEGORY);
             mStatusBarBrightnessControl = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
-            // only show on phones
-            if (!Utils.isPhone(getActivity())) {
-                mStatusBarGeneralCategory.removePreference(mStatusBarBrightnessControl);
-            } else {
                 // Status bar brightness control
                 mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(), 
                         Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
@@ -65,7 +61,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
                         mStatusBarBrightnessControl.setSummary(R.string.status_bar_toggle_info);
                     }
                 } catch (SettingNotFoundException e) {
-                }
             }
 
             // Status bar battery style
