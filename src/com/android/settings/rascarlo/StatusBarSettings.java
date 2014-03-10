@@ -1,12 +1,12 @@
 
 package com.android.settings.rascarlo;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -16,17 +16,27 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
 public class StatusBarSettings extends SettingsPreferenceFragment implements
-OnPreferenceChangeListener {
+        OnPreferenceChangeListener {
 
-    private static final String QUICK_PULLDOWN = "quick_pulldown";
+    // General
+    private static String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
+    // Brightness control
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    // Clock
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
+    // Quick Settings
+    private static final String QUICK_PULLDOWN = "quick_pulldown";
 
-    private ListPreference mQuickPulldown;
+    // General
+    private PreferenceCategory mStatusBarGeneralCategory;
+    // Brightness control
     private CheckBoxPreference mStatusBarBrightnessControl;
+    // Clock
     private ListPreference mStatusBarAmPm;
     private CheckBoxPreference mStatusBarClock;
+    // Quick Settings
+    private ListPreference mQuickPulldown;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,39 +44,13 @@ OnPreferenceChangeListener {
 
         addPreferencesFromResource(R.xml.status_bar_settings);
 
-        // Clock
-            mStatusBarClock = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_CLOCK);
-            mStatusBarClock.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_CLOCK, 1) == 1));
-            // Am-Pm
-            mStatusBarAmPm = (ListPreference) getPreferenceScreen().findPreference(STATUS_BAR_AM_PM);
-            try {
-                if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                        Settings.System.TIME_12_24) == 24) {
-                    mStatusBarAmPm.setEnabled(false);
-                    mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
-                }
-            } catch (SettingNotFoundException e ) {
-            }
-
-            int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_AM_PM, 2);
-            mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
-            mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
-            mStatusBarAmPm.setOnPreferenceChangeListener(this);
-
-        // Quick Settings pull down
-        mQuickPulldown = (ListPreference) getPreferenceScreen().findPreference(QUICK_PULLDOWN);
-        mQuickPulldown.setOnPreferenceChangeListener(this);
-        int quickPulldownValue = Settings.System.getInt(getActivity().getApplicationContext()
-                .getContentResolver(),
-                Settings.System.QS_QUICK_PULLDOWN, 0);
-        mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
-        mQuickPulldown.setSummary(mQuickPulldown.getEntry());
-
+        // General category
+        mStatusBarGeneralCategory = (PreferenceCategory) findPreference(STATUS_BAR_GENERAL_CATEGORY);
+        mStatusBarBrightnessControl = (CheckBoxPreference) getPreferenceScreen().findPreference(
+                STATUS_BAR_BRIGHTNESS_CONTROL);
         // Status bar brightness control
-        mStatusBarBrightnessControl = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
-        mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity()
+                .getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
         try {
             if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -77,28 +61,63 @@ OnPreferenceChangeListener {
         } catch (SettingNotFoundException e) {
         }
 
-        // don't show status bar brightnees and quick settings pull down control on tablet
-        if (Utils.isTablet(getActivity())) {
-            getPreferenceScreen().removePreference(mStatusBarBrightnessControl);
-            getPreferenceScreen().removePreference(mQuickPulldown);
+        // Clock
+        mStatusBarClock = (CheckBoxPreference) getPreferenceScreen().findPreference(
+                STATUS_BAR_CLOCK);
+        mStatusBarClock.setChecked((Settings.System.getInt(getActivity().getApplicationContext()
+                .getContentResolver(),
+                Settings.System.STATUS_BAR_CLOCK, 1) == 1));
+        // Am-Pm
+        mStatusBarAmPm = (ListPreference) getPreferenceScreen().findPreference(STATUS_BAR_AM_PM);
+        try {
+            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.TIME_12_24) == 24) {
+                mStatusBarAmPm.setEnabled(false);
+                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
+            }
+        } catch (SettingNotFoundException e) {
+        }
+
+        int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext()
+                .getContentResolver(),
+                Settings.System.STATUS_BAR_AM_PM, 2);
+        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
+        mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
+        mStatusBarAmPm.setOnPreferenceChangeListener(this);
+
+        // Quick settings category
+        // Quick Settings pull down
+        mQuickPulldown = (ListPreference) getPreferenceScreen().findPreference(QUICK_PULLDOWN);
+        // only show on phones
+        if (!Utils.isPhone(getActivity())) {
+            if (mQuickPulldown != null)
+                mStatusBarGeneralCategory.removePreference(mQuickPulldown);
+        } else {
+            mQuickPulldown.setOnPreferenceChangeListener(this);
+            int quickPulldownValue = Settings.System.getInt(getActivity().getApplicationContext()
+                    .getContentResolver(),
+                    Settings.System.QS_QUICK_PULLDOWN, 0);
+            mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
+            mQuickPulldown.setSummary(mQuickPulldown.getEntry());
         }
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mQuickPulldown) {
-            int quickPulldownValue = Integer.valueOf((String) objValue);
-            int quickPulldownIndex = mQuickPulldown.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
-            mQuickPulldown.setSummary(mQuickPulldown.getEntries()[quickPulldownIndex]);
-            return true;
 
-        } else if (preference == mStatusBarAmPm) {
+        if (preference == mStatusBarAmPm) {
             int statusBarAmPm = Integer.valueOf((String) objValue);
             int indexAmPm = mStatusBarAmPm.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_AM_PM, statusBarAmPm);
             mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[indexAmPm]);
+            return true;
+
+        } else if (preference == mQuickPulldown) {
+            int quickPulldownValue = Integer.valueOf((String) objValue);
+            int quickPulldownIndex = mQuickPulldown.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
+            mQuickPulldown.setSummary(mQuickPulldown.getEntries()[quickPulldownIndex]);
             return true;
 
         }
