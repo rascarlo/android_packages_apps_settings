@@ -14,7 +14,7 @@
     <string name="reset_string">Reimpostare</string>
 
     <!-- Volume Adjust sound -->
-    <string name="volume_adjust_sounds_enable_title">Suono di aggiustamento volume</string>
+    <string name="volume_adjust_sounds_enable_title">Suono di regolazione volume</string>
     <string name="volume_adjust_sounds_enable_summary">Riproduce un suono durante la regolazione del volume attraverso gli appositi tasti</string>
     
     <!-- Sound settings screen, volumes -->
@@ -27,7 +27,7 @@
     <string name="volume_ring_only_description">Suoneria</string>
 
     <!-- kill app long press back -->
-    <string name="kill_app_longpress_back">Pulsante indietro per killare apps</string>
+    <string name="kill_app_longpress_back">Pulsante indietro per terminare apps</string>
     <string name="kill_app_longpress_back_summary">Termina le app in primo piano tramite una pressione prolungata del pulsante indietro</string>
     
     <!-- BUILD TWEAKS  -->
@@ -39,7 +39,7 @@
     <string name="system_interface_title">Build Tweaks</string>
     
     <!-- Volume rocker behaviours -->
-    <string name="volume_rocker_category_title">tasti Volume</string>
+    <string name="volume_rocker_category_title">Tasti volume</string>
     
      <!--- Volume key cursor control -->
     <string name="volume_key_cursor_control_title">Controlla il cursore tastiera attraverso i tasti del volume</string>
@@ -49,10 +49,10 @@
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_wake_title">Risveglio con tasti volume</string>
-    <string name="pref_volume_wake_summary">Premendo i tasti volume il tuo Nexus si accende</string>
+    <string name="pref_volume_wake_summary">Premendo i tasti volume lo schermo del tuo Nexus si accende</string>
 
     <!-- Volume rocker music control -->
-    <string name="volbtn_music_controls_title">Controlli musica con tasti volume</string>
+    <string name="volbtn_music_controls_title">Controllo musica con tasti volume</string>
     <string name="volbtn_music_controls_summary">Tramite pressione prolungata dei tasti volume è possibile scorrere le tracce audio</string>
 
     <!-- Status bar  -->
@@ -77,19 +77,19 @@
     <string name="quick_pulldown_right">Destra</string>
     <!-- Status bar brightness control -->
     <string name="status_bar_toggle_brightness">Controllo luminosità</string>
-    <string name="status_bar_toggle_brightness_summary">Regola la luminosità scorrendo da un lato all\'altro della status bar</string>
+    <string name="status_bar_toggle_brightness_summary">Regola la luminosità scorrendo con un dito da un lato all\'altro della status bar</string>
     <string name="status_bar_toggle_info">Necessita disattivazione luminosità automatica</string>
 
     <!-- Safe headset volume restore checkbox -->
     <string name="safe_headset_volume_title">Volume sicurezza cuffie</string>
-    <string name="safe_headset_volume_summary">Impedisce livelli di volume alti all\'inserimento delle cuffie</string>
+    <string name="safe_headset_volume_summary">Impedisce livelli di volume troppo alti all\'inserimento delle cuffie</string>
 
     <!--  Plug-in prompt -->
-    <string name="plug_in_prompt_settings_title">Prompt Plug-in</string>
+    <string name="plug_in_prompt_settings_title"> Comportamento plug-in</string>
 
     <!-- Sound settings, Charging sounds enable/disable, setting check box label -->
     <string name="power_notifications_enable_title">Abilita suono/vibrazione</string>
-    <string name="power_notifications_enable_summary">Riproduci un suono/vibrazione quando collegato/scollegato</string>
+    <string name="power_notifications_enable_summary">Riproduce un suono/vibrazione quando collegato/scollegato</string>
     <!-- Sound settings, Charging sounds vibrate enable/disable, setting check box label -->
     <string name="power_notifications_vibrate_title">Vibra</string>
     <!-- Sound settings, Charging sounds ringtone selection, preference label -->
@@ -120,10 +120,10 @@
     <string name="picker_arrow">→</string>
     <string name="default_time">Normale</string>
     <string name="custom_time">Personalizzato</string>
-    <string name="dialog_test">Test</string>
+    <string name="dialog_test">Prova</string>
     <string name="dialog_delete_title">Cancella</string>
     <string name="dialog_delete_message">Rimuovere l\'oggetto selezionato?</string>
-    <string name="dialog_test_message">Spegni lo schermo per vedere il nuovo colore azione o premere annulla per interrompere il test</string>
+    <string name="dialog_test_message">Spegni lo schermo per vedere il nuovo colore in azione o premere annulla per interrompere la prova</string>
     <string name="dialog_test_button">Annulla</string>
 
     <!-- Values for the notification light pulse spinners -->
@@ -155,22 +155,22 @@
     <string name="navigation_bar_height_0">0dp (nascosta)</string>
 
     <!-- Lock Screen Shortcuts -->
-    <string name="lockscreen_target_info">Trascina il lockring sui targets per assegnargli una scorciatoia</string>
-    <string name="lockscreen_target_title">Targets Lockscreen</string>
+    <string name="lockscreen_target_info">Trascina il lockring sugli obiettivi per assegnargli una scorciatoia</string>
+    <string name="lockscreen_target_title">Scorciatoie schermata di sblocco</string>
     <string name="lockscreen_target_reset">Ripristino impostazioni predefinite</string>
-    <string name="lockscreen_target_reset_message">Cancellare tutte le scorciatoie create dall\'utente e ripristinare quelle predefinite?</string>
+    <string name="lockscreen_target_reset_message">Cancellare tutte le scorciatoie personalizzate e ripristinare quelle predefinite?</string>
     <string name="lockscreen_target_empty">Vuoto</string>
     <string name="lockscreen_target_edit_title">Seleziona scorciatoie e icone</string>
-    <string name="lockscreen_target_edit_msg">Selezione o cambia la tua applicazione o activity preferita inclusa l\'icona</string>
+    <string name="lockscreen_target_edit_msg">Seleziona/cambia le tue applicazioni o attività preferite incluse le icone</string>
     <!-- Lock screen shortcuts icon picker -->
     <string name="icon_picker_title">Scegli origine icona</string>
     <string name="icon_picker_system_icons_title">Icone di sistema</string>
     <string name="icon_picker_gallery_title">Galleria</string>
-    <string name="icon_picker_pack_title">Icon pack</string>
+    <string name="icon_picker_pack_title">Pacchetto icone</string>
     <string name="profile_applist_title">Apps</string>
-    <string name="picker_activities">Activities</string>
+    <string name="picker_activities">Attività</string>
     <string name="select_custom_app_title">Seleziona app preferita</string>
-    <string name="select_custom_activity_title">Seleziona activity preferita</string>
+    <string name="select_custom_activity_title">Seleziona attività preferita</string>
     <string name="icon_picker_choose_icon_title">Scegli icona</string>
     <string name="icon_picker_alarm">Sveglia</string>
     <string name="icon_picker_browser">Browser</string>
@@ -182,7 +182,7 @@
     <string name="icon_picker_email2">Email Holo</string>
     <string name="icon_picker_facebook">Facebook</string>
     <string name="icon_picker_gallery">Galleria</string>
-    <string name="icon_picker_google_small">Google (small)</string>
+    <string name="icon_picker_google_small">Google (piccolo)</string>
     <string name="icon_picker_googleplus">Google Plus</string>
     <string name="icon_picker_googletalk">Hangouts</string>
     <string name="icon_picker_maps">Maps</string>
@@ -198,7 +198,7 @@
 
     <!-- Navigation ring shortcuts -->
     <string name="navigation_ring_title">Scorciatoie di avvio veloce</string>
-    <string name="navring_target_reset_message">Cancellare tutte le scorciatoie di avvio veloce create dall\'utente e ripristinare quelle predefinite?</string>
+    <string name="navring_target_reset_message">Cancellare tutte le scorciatoie di avvio veloce personalizzate e ripristinare quelle predefinite?</string>
     <string name="navring_target_reset">Ripristino scorciatoie di avvio veloce predefinite</string>
     <string name="navring_action_open_ime_switcher">Apri selettore IME</string>
     <string name="navring_action_kill_app">Termina app</string>
@@ -215,7 +215,7 @@
 
     <!-- Double-tap to sleep -->
     <string name="double_tap_sleep_title">Doppio-tocco per spegnere</string>
-    <string name="double_tap_sleep_secure_lockscreen_category">Secure lockscreen</string>
+    <string name="double_tap_sleep_secure_lockscreen_category">Lockscreen sicura</string>
     <string name="status_bar_double_tap_sleep_status_bar_title">Barra di stato</string>
     <string name="status_bar_double_tap_sleep_status_bar_summary">Batti su qualsiasi parte della status bar</string>
     <string name="status_bar_double_tap_sleep_glowpad_title">Raggio lockring</string>
