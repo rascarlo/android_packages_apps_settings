@@ -217,7 +217,7 @@
     <string name="double_tap_sleep_title">Doppio-tocco per spegnere</string>
     <string name="double_tap_sleep_secure_lockscreen_category">Lockscreen sicura</string>
     <string name="status_bar_double_tap_sleep_status_bar_title">Barra di stato</string>
-    <string name="status_bar_double_tap_sleep_status_bar_summary">Batti su qualsiasi parte della status bar</string>
+    <string name="status_bar_double_tap_sleep_status_bar_summary">Batti su qualsiasi parte della barra di stato</string>
     <string name="status_bar_double_tap_sleep_glowpad_title">Raggio lockring</string>
     <string name="status_bar_double_tap_sleep_glowpad_summary">Batti entro il raggio del lockring</string>
     <string name="status_bar_double_tap_sleep_pin_password_title">Pin e Password</string>
