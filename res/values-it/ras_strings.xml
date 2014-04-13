@@ -85,7 +85,7 @@
     <string name="safe_headset_volume_summary">Impedisce livelli di volume troppo alti all\'inserimento delle cuffie</string>
 
     <!--  Plug-in prompt -->
-    <string name="plug_in_prompt_settings_title"> Comportamento plug-in</string>
+    <string name="plug_in_prompt_settings_title">Comportamento plug-in</string>
 
     <!-- Sound settings, Charging sounds enable/disable, setting check box label -->
     <string name="power_notifications_enable_title">Abilita suono/vibrazione</string>
