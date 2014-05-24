@@ -21,6 +21,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
     private static String STATUS_BAR_GENERAL_CATEGORY = "status_bar_general_category";
     // Brightness control
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    // Native battery percentage
+    private static final String STATUS_BAR_NATIVE_BATTERY_PERCENTAGE = "status_bar_native_battery_percentage";
     // Clock
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
@@ -32,6 +34,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
     private PreferenceCategory mStatusBarGeneralCategory;
     // Brightness control
     private CheckBoxPreference mStatusBarBrightnessControl;
+    // Native battery percentage
+    private CheckBoxPreference mStatusBarNativeBatteryPercentage;
     // Clock
     private ListPreference mStatusBarAmPm;
     private CheckBoxPreference mStatusBarClock;
@@ -58,6 +62,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
                     }
                 } catch (SettingNotFoundException e) {
             }
+
+        // Native battery percentage
+        mStatusBarNativeBatteryPercentage = (CheckBoxPreference) getPreferenceScreen()
+                .findPreference(STATUS_BAR_NATIVE_BATTERY_PERCENTAGE);
+        mStatusBarNativeBatteryPercentage.setChecked((Settings.System.getInt(getActivity()
+                .getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, 0) == 1));
 
             // Clock
             mStatusBarClock = (CheckBoxPreference) getPreferenceScreen().findPreference(STATUS_BAR_CLOCK);
@@ -125,6 +136,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements OnP
             value = mStatusBarBrightnessControl.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
+            return true;
+
+        } else if (preference == mStatusBarNativeBatteryPercentage) {
+            value = mStatusBarNativeBatteryPercentage.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NATIVE_BATTERY_PERCENTAGE, value ? 1 : 0);
             return true;
 
         } else if (preference == mStatusBarClock) {

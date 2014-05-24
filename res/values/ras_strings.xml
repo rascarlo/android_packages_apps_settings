@@ -57,6 +57,9 @@
 
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
+    <!-- Statusbar native battery percent -->
+    <string name="status_bar_native_battery_percentage_title">Battery percentage</string>
+    <string name="status_bar_native_battery_percentage_summary">Show hidden percentage\'s text</string>
     <!-- Status bar clock -->
     <string name="status_bar_clock_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
