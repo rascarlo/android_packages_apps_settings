@@ -55,6 +55,10 @@
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across status bar</string>
     <string name="status_bar_toggle_info">Automatic brightness must be disabled</string>
 
+    <!-- Statusbar native battery percent -->
+    <string name="status_bar_native_battery_percentage_title">Battery percentage</string>
+    <string name="status_bar_native_battery_percentage_summary">Show hidden percentage</string>
+
     <!-- Status bar clock -->
     <string name="status_bar_clock_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
