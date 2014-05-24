@@ -57,13 +57,6 @@
 
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
-    <!-- Status bar circle battery -->
-    <string name="status_bar_battery_title">Battery style</string>
-    <string name="status_bar_style_icon">Icon</string>
-    <string name="status_bar_style_icon_percentage">Icon with percentage</string>
-    <string name="status_bar_style_hidden">Hidden</string>
-    <string name="status_bar_battery_status_circle">Circle</string>
-    <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
     <!-- Status bar clock -->
     <string name="status_bar_clock_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
