@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="general_string">Generale</string>
+    <string name="build_date">Data build rastapop</string>
+    <string name="system_settings_title">Rastapop</string>
+    <string name="status_bar_screen_title">Barra di stato</string>
+    <string name="status_bar_show_battery_percent_title">Percento batteria</string>
+    <string name="status_bar_show_battery_percent_summary">Mostra la percentuale batteria</string>
+    <string name="status_bar_brightness_control_title">Controllo luminosità</string>
+    <string name="status_bar_brightness_control_summary">Regola la luminosità tramite slide da un lato all\'altro della barra di stato</string>
+    <string name="status_bar_brightness_control_info">Necessita disattivazione luminosità automatica</string>
+    <string name="volume_rocker_screen_title">Tasti volume</string>
+    <string name="volume_rocker_wake_title">Risveglio con tasti volume</string>
+    <string name="volume_rocker_wake_summary">Premendo i tasti volume lo schermo del Nexus si accende</string>
+    <string name="volume_key_cursor_control_title">Controllo cursore tastiera attraverso i tasti volume</string>
+    <string name="volume_key_cursor_control_off">Disabilitato</string>
+    <string name="volume_key_cursor_control_on">Volume su/giù sposta il cursore a sx/dx</string>
+    <string name="volume_key_cursor_control_on_reverse">Volume su/giù sposta il cursore a dx/sx</string>
+    <string name="volume_key_adjust_sound_title">Suono di regolazione volume</string>
+    <string name="volume_key_adjust_sound_summary">Riproduce un suono durante la regolazione del volume attraverso i tasti</string>
+    <string name="kill_app_longpress_back">Pulsante indietro per terminare app</string>
+    <string name="kill_app_longpress_back_summary">Termina l\'app in primo piano dopo pressione prolungata del pulsante indietro</string>
+    <string name="navigation_bar_screen_title">Barra di navigazione</string>
+    <string name="navigation_bar_height">Altezza barra di navigazione</string>
+    <string name="navigation_bar_height_48">48dp (predefinito)</string>
+    <string name="navigation_bar_height_0">0dp (nascosta)</string>
+    <string name="system_settings_screen_title">Impostazioni di sistema</string>
+    <string name="advanced_reboot_title">Riavvio avanzato</string>
+    <string name="advanced_reboot_summary">Quando sbloccato, include opzioni nel menu di spegnimento per riavviare in recovery, bootloader o per eseguire un riavvio soft</string>
+    
+    </resources>
