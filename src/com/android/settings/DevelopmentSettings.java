@@ -817,7 +817,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     }
 
     private static boolean showEnableMultiWindowPreference() {
-        return !"user".equals(Build.TYPE);
+//        return !"user".equals(Build.TYPE);
+        return true;
     }
 
     private void setEnableMultiWindow(boolean value) {
