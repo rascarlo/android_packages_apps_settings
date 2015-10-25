@@ -6,7 +6,16 @@
     <string name="build_date_default">2014-01-01-0000</string>
     <!-- Rasmallow settings  -->
     <string name="ras_rasmallow_settings_title">Rasmallow</string>
+    <!-- Rasmallow settings category system -->
+    <string name="ras_rasmallow_settings_category_system_title">System</string>
     <!-- kill app long press back key -->
     <string name="ras_kill_app_long_press_back_key_title">Kill app back key</string>
     <string name="ras_kill_app_long_press_back_key_summary">Kill the foreground app by long-pressing the back key</string>
+    <!--  Volume keys -->
+    <string name="ras_rasmallow_settings_category_volume_keys_title">Volume keys</string>
+    <!--- Volume keys cursor control -->
+    <string name="ras_volume_keys_cursor_control_title">Cursor control</string>
+    <string name="ras_volume_keys_cursor_control_off">Disabled</string>
+    <string name="ras_volume_keys_cursor_control_on">Key up/down moves cursor left/right</string>
+    <string name="ras_volume_keys_cursor_control_on_reverse">Key up/down moves cursor right/left</string>
 </resources>

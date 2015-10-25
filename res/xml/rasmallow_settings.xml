@@ -4,9 +4,29 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/ras_rasmallow_settings_title" >
 
-    <SwitchPreference
-        android:key="ras_kill_app_long_press_back_key"
-        android:title="@string/ras_kill_app_long_press_back_key_title"
-        android:summary="@string/ras_kill_app_long_press_back_key_summary"/>
+    <PreferenceCategory
+        android:key="ras_rasmallow_settings_category_system"
+        android:title="@string/ras_rasmallow_settings_category_system_title">
+
+        <SwitchPreference
+            android:key="ras_kill_app_long_press_back_key"
+            android:title="@string/ras_kill_app_long_press_back_key_title"
+            android:summary="@string/ras_kill_app_long_press_back_key_summary"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="ras_rasmallow_settings_category_volume_keys"
+        android:title="@string/ras_rasmallow_settings_category_volume_keys_title">
+
+        <ListPreference
+            android:dialogTitle="@string/ras_volume_keys_cursor_control_title"
+            android:entries="@array/ras_volume_keys_cursor_control_entries"
+            android:entryValues="@array/ras_volume_keys_cursor_control_values"
+            android:key="ras_volume_keys_cursor_control"
+            android:persistent="false"
+            android:title="@string/ras_volume_keys_cursor_control_title" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
