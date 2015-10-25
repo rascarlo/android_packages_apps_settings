@@ -256,6 +256,14 @@
                 android:icon="@drawable/ic_settings_about"
                 />
 
+        <!-- Rasmallow settings -->
+        <dashboard-tile
+                android:id="@+id/rasmallow_settings"
+                android:title="@string/ras_rasmallow_settings_title"
+                android:fragment="com.android.settings.rasmallow.RasmallowSettings"
+                android:icon="@drawable/ic_settings_rasmallow"
+                />
+
     </dashboard-category>
 
 </dashboard-categories>

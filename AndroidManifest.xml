@@ -2584,5 +2584,7 @@
                 android:value="com.android.settings.applications.WriteSettingsDetails" />
         </activity>
 
+        <activity android:name=".rasmallow.RasmallowSettings" />
+
     </application>
 </manifest>

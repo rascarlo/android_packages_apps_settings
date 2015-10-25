@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/ras_rasmallow_settings_title" >
+
+    <SwitchPreference
+        android:key="ras_kill_app_long_press_back_key"
+        android:title="@string/ras_kill_app_long_press_back_key_title"
+        android:summary="@string/ras_kill_app_long_press_back_key_summary"/>
+
+</PreferenceScreen>

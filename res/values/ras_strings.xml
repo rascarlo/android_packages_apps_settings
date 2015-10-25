@@ -4,4 +4,9 @@
     <!-- About phone screen, build date of ROM -->
     <string name="build_date">rasmallow build date</string>
     <string name="build_date_default">2014-01-01-0000</string>
+    <!-- Rasmallow settings  -->
+    <string name="ras_rasmallow_settings_title">Rasmallow</string>
+    <!-- kill app long press back key -->
+    <string name="ras_kill_app_long_press_back_key_title">Kill app back key</string>
+    <string name="ras_kill_app_long_press_back_key_summary">Kill the foreground app by long-pressing the back key</string>
 </resources>
